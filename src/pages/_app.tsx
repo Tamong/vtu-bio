@@ -2,20 +2,15 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { api } from "~/utils/api";
-import type { AppProps } from "next/app";
-import { Analytics } from "@vercel/analytics/react";
 import "~/styles/globals.css";
 
-const MyApp = ({
+const MyApp: AppType<{ session: Session | null }> = ({
   Component,
-  pageProps,
-  router,
-}: AppProps & { session: Session | null }) => {
-  const { session, ...restPageProps } = pageProps;
+  pageProps: { session, ...pageProps },
+}) => {
   return (
     <SessionProvider session={session}>
-      <Component {...restPageProps} />
-      <Analytics />
+      <Component {...pageProps} />
     </SessionProvider>
   );
 };
