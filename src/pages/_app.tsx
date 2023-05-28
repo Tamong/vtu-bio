@@ -4,16 +4,17 @@ import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
-
 import "~/styles/globals.css";
 
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp = ({
   Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) => {
+  pageProps,
+  router,
+}: AppProps & { session: Session | null }) => {
+  const { session, ...restPageProps } = pageProps;
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <Component {...restPageProps} />
       <Analytics />
     </SessionProvider>
   );
