@@ -2,7 +2,6 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import { number } from "zod";
 import { api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 

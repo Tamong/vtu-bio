@@ -1,29 +1,23 @@
-import { useEffect } from "react";
 import { type NextPage } from "next";
-import Head from "next/head";
 import { GetStaticProps } from "next";
-import Link from "next/link";
-import { number } from "zod";
 import { api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 
-const Home: NextPage<{ redirect: string }> = ({ redirect }) => {
+const Redirect: NextPage<{ redirect: string }> = ({ redirect }) => {
   const { data } = api.redirect.getUrl.useQuery({ slug: redirect });
 
   if (!data) {
     return <div>Loading...</div>;
   }
 
-  useEffect(() => {
-    if (data && data.url) {
-      window.location.href = data.url;
-    }
-  }, [data]);
-
-  return null;
+  return (
+    <>
+      <meta http-equiv="Refresh" content={`0; url=${data.url}`} />
+    </>
+  );
 };
 
-export default Home;
+export default Redirect;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const ssg = generateSSGHelper();
