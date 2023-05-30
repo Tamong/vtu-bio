@@ -79,14 +79,12 @@ const Create: NextPage = () => {
                   Short Link Generated!
                   <br /> https://vtu.bio/{slug}
                 </h1>
-                <Button onClick={() => copyToClipboard}>
-                  Copy to clipboard
-                </Button>
+                <Button onClick={copyToClipboard}>Copy to clipboard</Button>
               </div>
             ) : (
               <Form {...form}>
                 <form
-                  onSubmit={() => form.handleSubmit(onSubmit)}
+                  onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-4"
                 >
                   <FormField
