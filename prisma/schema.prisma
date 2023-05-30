@@ -69,8 +69,8 @@ model VTuber {
     image       String?
     color       String? // hex color #000000
     association Association[] // hololive, nijisanji, independent, hololive, holoEN 
-    customLinks customLink[]
-    socialLinks socialLink[]
+    tag         Tag[] // language, game, etc
+    links       Link[]
     user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@index([userId])
@@ -80,32 +80,49 @@ model Association {
     id          String   @id @default(cuid())
     vtuberId    String
     name        String   @unique
+    color       String   // hex color #000000
     vtuber      VTuber   @relation(fields: [vtuberId], references: [id])
 
     @@index([vtuberId])
 }
 
-model customLink {
-    id      String   @id @default(cuid())
-    vtuberId String
-    title    String
-    description String?
-    slug     String  @unique// vtu.bio/qwertyui
-    url     String // the user's input
-    vtuber  VTuber   @relation(fields: [vtuberId], references: [id], onDelete: Cascade)
-    @@index([vtuberId])
+model Tag {
+    id          String   @id @default(cuid())
+    vtuberId    String
+    name        String   @unique
+    vtuber      VTuber   @relation(fields: [vtuberId], references: [id])
 
+    @@index([vtuberId])
+}
+
+model Link {
+  id          String       @id @default(cuid())
+  vtuberId    String
+  type        String       // custom, social
+  title       String
+  slug        String       @unique // vtu.bio/qwertyui
+  url         String       // the user's input
+  customLink  customLink?  
+  socialLink  socialLink?  
+  vtuber      VTuber       @relation(fields: [vtuberId], references: [id], onDelete: Cascade)
+
+  @@index([vtuberId])
+}
+
+model customLink {
+  id          String      @id @default(cuid())
+  link        Link        @relation(fields: [linkId], references: [id])
+  linkId      String      @unique
+  description String
+
+  @@index([linkId])
 }
 
 model socialLink {
-    id      String   @id @default(cuid())
-    vtuberId String
-    username String // @username
-    slug     String @unique// randomly generate vtu.bio/hbwehif2u
-    url     String // automatically generated
-    provider String // twitter, youtube, twitch, bilibili, facebook, instagram, tiktok
-    vtuber  VTuber   @relation(fields: [vtuberId], references: [id], onDelete: Cascade)
+  id          String      @id @default(cuid())
+  link        Link        @relation(fields: [linkId], references: [id])
+  linkId      String      @unique
+  provider    String      // twitter, youtube, twitch, bilibili, facebook, instagram, tiktok
 
-    @@index([vtuberId])
-
+  @@index([linkId])
 }
