@@ -74,13 +74,13 @@ const Home: NextPage<{ user: string }> = ({ user }) => {
             {data.links.map((link, index) => (
               <span key={index}>
                 <Link
-                  href={`http://vtu.bio/${link.slug}`}
+                  href={`/${link.slug}`}
                   target="_blank"
                   className="flex flex-row items-center gap-12 px-4"
                 >
-                  {link.customLink
-                    ? `${link.customLink.description || ""} - ${link.title}`
-                    : `${link.socialLink?.provider || ""} - ${link.title}`}
+                  {link.title}
+                  {link.socialLink && ` - ` + link.socialLink.provider}
+                  {link.description && ` - ` + link.description}
                 </Link>
                 {index !== data.links.length - 1}
               </span>

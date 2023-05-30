@@ -7,12 +7,22 @@ const Redirect: NextPage<{ redirect: string }> = ({ redirect }) => {
   const { data } = api.redirect.getUrl.useQuery({ slug: redirect });
 
   if (!data) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <div className="flex flex-col items-center justify-center">
+          404 Page Not Found
+        </div>
+      </>
+    );
   }
 
   return (
     <>
-      <meta http-equiv="Refresh" content={`0; url=${data.url}`} />
+      <head>
+        <title>{data.title}</title>
+        <meta name="description" content="Short Link provided by vtu.bio" />
+        <meta httpEquiv="Refresh" content={`0; url=${data.url}`} />
+      </head>
     </>
   );
 };
