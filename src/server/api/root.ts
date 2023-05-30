@@ -1,5 +1,6 @@
 import { profileRouter } from "~/server/api/routers/profile";
 import { redirectRouter } from "~/server/api/routers/redirect";
+import { createRouter } from "~/server/api/routers/create";
 import { createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -10,6 +11,7 @@ import { createTRPCRouter } from "~/server/api/trpc";
 export const appRouter = createTRPCRouter({
   profile: profileRouter,
   redirect: redirectRouter,
+  create: createRouter,
 });
 
 // export type definition of API

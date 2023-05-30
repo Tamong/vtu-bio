@@ -18,7 +18,6 @@ export const profileRouter = createTRPCRouter({
           tag: true,
           links: {
             include: {
-              customLink: true,
               socialLink: true,
             },
           },
