@@ -2,18 +2,10 @@ import { z } from "zod";
 import {
   createTRPCRouter,
   publicProcedure,
-  protectedProcedure,
+  //protectedProcedure,
 } from "~/server/api/trpc";
 
 export const profileRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
   getUser: publicProcedure
     .input(z.object({ slug: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -22,9 +14,14 @@ export const profileRouter = createTRPCRouter({
           name: input.slug,
         },
         include: {
-          socialLinks: true,
-          customLinks: true,
           association: true,
+          tag: true,
+          links: {
+            include: {
+              customLink: true,
+              socialLink: true,
+            },
+          },
         },
       });
 
