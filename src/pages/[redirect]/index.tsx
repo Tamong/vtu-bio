@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import Head from "next/head";
 import { GetStaticProps } from "next";
 import { api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
@@ -18,11 +19,11 @@ const Redirect: NextPage<{ redirect: string }> = ({ redirect }) => {
 
   return (
     <>
-      <head>
+      <Head>
         <title>{data.title}</title>
         <meta name="description" content="Short Link provided by vtu.bio" />
         <meta httpEquiv="Refresh" content={`0; url=${data.url}`} />
-      </head>
+      </Head>
     </>
   );
 };

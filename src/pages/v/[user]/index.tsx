@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import { api } from "~/utils/api";
@@ -28,7 +29,7 @@ const Home: NextPage<{ user: string }> = ({ user }) => {
       </Head>
       <main className="flex min-h-screen flex-col items-center" style={bgcolor}>
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <img
+          <Image
             className="h-128 w-128 rounded-2xl shadow-2xl"
             src={data.image ? data.image : "/favicon.ico"}
             alt="Profile Picture"
