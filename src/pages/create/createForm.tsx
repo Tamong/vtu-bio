@@ -17,6 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+
 import { Clipboard } from "lucide-react";
 
 const formSchema = z.object({
@@ -26,6 +28,7 @@ const formSchema = z.object({
 });
 
 const CreateForm: NextPage = () => {
+  const { toast } = useToast();
   const [slug, setSlug] = useState("");
 
   // 1. Define your form.
@@ -44,6 +47,10 @@ const CreateForm: NextPage = () => {
     },
     onError: () => {
       alert("Error creating link: Try again.");
+      toast({
+        title: "Error creating link",
+        description: "Please try again in a few minutes.",
+      });
     },
   });
 
@@ -57,7 +64,10 @@ const CreateForm: NextPage = () => {
   const copyToClipboard = async () => {
     const link = `https://vtu.bio/${slug}`;
     await navigator.clipboard.writeText(link);
-    alert(`Copied link to clipboard: ${link}`);
+    toast({
+      title: "Link to your clipboard!",
+      description: `${link}`,
+    });
   };
   return (
     <div>
@@ -122,7 +132,7 @@ const CreateForm: NextPage = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <Button type="submit">Create</Button>
             </form>
           </Form>
         )}

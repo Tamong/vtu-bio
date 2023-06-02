@@ -1,6 +1,5 @@
-import { type NextPage } from "next";
 import Head from "next/head";
-import { GetStaticProps } from "next";
+import type { NextPage, GetStaticProps } from "next";
 import { api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 

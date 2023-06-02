@@ -21,8 +21,8 @@ const buttonVariants = cva(
       },
       size: {
         default: "py-2 px-4",
-        sm: "px-3 rounded-md",
-        lg: "px-8 rounded-md",
+        sm: "py-1 px-3 rounded-md",
+        lg: "py-4 px-8 rounded-md",
       },
     },
     defaultVariants: {
