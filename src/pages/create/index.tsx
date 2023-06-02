@@ -19,8 +19,8 @@ const Create: NextPage = () => {
         <div className="container flex flex-col items-center justify-center gap-8">
           {sessionData ? (
             <>
-              <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-[4rem]">
-                Generate
+              <h1 className="text-5xl font-bold tracking-tight text-foreground ">
+                Create Link
               </h1>
               <CreateForm />
             </>
