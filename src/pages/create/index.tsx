@@ -3,7 +3,7 @@
 import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
-import CreateForm from "./createForm";
+import CreateForm from "@/components/createForm";
 import Layout from "@/components/layout";
 
 const Create: NextPage = () => {
