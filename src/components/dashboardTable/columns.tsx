@@ -10,6 +10,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { api } from "~/utils/api";
@@ -53,20 +61,29 @@ export const columns: ColumnDef<userLink>[] = [
     cell: ({ row }) => {
       const userLink = row.original;
       return (
-        <button
-          onClick={async () => {
-            await navigator.clipboard.writeText(
-              `https://vtu.bio/${userLink.slug}`
-            );
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <button
+                onClick={async () => {
+                  await navigator.clipboard.writeText(
+                    `https://vtu.bio/${userLink.slug}`
+                  );
 
-            toast({
-              title: "Short Link copied!",
-              description: `https://vtu.bio/${userLink.slug}`,
-            });
-          }}
-        >
-          {userLink.url}
-        </button>
+                  toast({
+                    title: "Short Link copied!",
+                    description: `https://vtu.bio/${userLink.slug}`,
+                  });
+                }}
+              >
+                {userLink.url}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Copy to Clipboard</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       );
     },
   },
