@@ -27,7 +27,7 @@ export const dashboardRouter = createTRPCRouter({
   deleteLink: protectedProcedure
     .input(z.object({ id: z.string().cuid() }))
     .mutation(async ({ ctx, input }) => {
-      const link = await ctx.prisma.link.delete({
+      await ctx.prisma.link.delete({
         where: {
           id: input.id,
         },
