@@ -37,8 +37,8 @@
   }
 
   .dark {
-    --background: 204 100% 1%;
-    --foreground: 205 90% 96%;
+    --background: 205 22% 23%;
+    --foreground: 24 100% 99%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -77,5 +77,8 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  body {
+    @apply bg-background text-foreground dark:bg-background dark:text-foreground;
   }
 }

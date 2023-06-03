@@ -2,8 +2,8 @@ import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Navbar: NextPage = () => {
   return (
@@ -17,8 +17,9 @@ const Navbar: NextPage = () => {
           </Link>
         </div>
 
-        <div className="hidden font-medium sm:flex">
+        <div className="hidden gap-2 font-medium sm:flex">
           <Auth />
+          <ModeToggle />
         </div>
       </nav>
     </div>

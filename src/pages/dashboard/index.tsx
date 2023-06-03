@@ -5,15 +5,10 @@ import { api } from "~/utils/api";
 import Layout from "~/components/layout";
 import Head from "next/head";
 import { useSession } from "next-auth/react";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { type userLink, columns } from "@/components/dashboardTable/columns";
 import { DataTable } from "@/components/dashboardTable/data-table";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
-import { cn } from "~/lib/utils";
-
-dayjs.extend(relativeTime);
 
 function getData(): userLink[] {
   const { data } = api.dashboard.getUser.useQuery();
