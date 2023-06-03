@@ -8,21 +8,13 @@ import { cn } from "@/lib/utils";
 const Navbar: NextPage = () => {
   return (
     <div className="mx-8 mb-4 mt-8 flex">
-      <nav className="flex min-w-full justify-between space-x-6 text-xl ">
+      <nav className="flex min-w-full justify-between text-xl">
         <div className="flex items-center justify-center ">
           <Link href="/" className="mr-4 flex">
-            <h1 className="bg-gradient-to-r from-secondary to-primary bg-clip-text text-3xl font-extrabold tracking-tight text-transparent drop-shadow-sm">
+            <h1 className="bg-gradient-to-r from-primary to-accent bg-clip-text text-3xl font-extrabold tracking-tight text-transparent drop-shadow-sm">
               vtu<span className=" text-foreground">.</span>bio
             </h1>
           </Link>
-          <div className="hidden gap-4 font-medium sm:flex">
-            <Link
-              href="/create"
-              className={cn("transition-colors hover:text-foreground/80")}
-            >
-              Create Link
-            </Link>
-          </div>
         </div>
 
         <div className="hidden font-medium sm:flex">

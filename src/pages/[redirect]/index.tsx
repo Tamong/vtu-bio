@@ -20,7 +20,14 @@ const Redirect: NextPage<{ redirect: string }> = ({ redirect }) => {
     <>
       <Head>
         <title>{data.title}</title>
-        <meta name="description" content="Short Link provided by vtu.bio" />
+        <meta
+          name="description"
+          content={
+            data.description
+              ? data.description
+              : "Short Link provided by vtu.bio"
+          }
+        />
         <meta httpEquiv="Refresh" content={`0; url=${data.url}`} />
       </Head>
     </>
