@@ -12,10 +12,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import { api } from "~/utils/api";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type userLink = {
+  id: string;
   date: string;
   title: string;
   description: string | null;
@@ -47,13 +49,28 @@ export const columns: ColumnDef<userLink>[] = [
     header: "Description",
   },
   {
-    accessorKey: "url",
-    header: "Redirect URL",
+    accessorKey: "Redirect URL",
+    cell: ({ row }) => {
+      const userLink = row.original;
+      return (
+        <button
+          onClick={async () => {
+            await navigator.clipboard.writeText(
+              `https://vtu.bio/${userLink.slug}`
+            );
+
+            toast({
+              title: "Short Link copied!",
+              description: `https://vtu.bio/${userLink.slug}`,
+            });
+          }}
+        >
+          {userLink.url}
+        </button>
+      );
+    },
   },
-  {
-    accessorKey: "slug",
-    header: "Short Link",
-  },
+
   {
     id: "actions",
     cell: ({ row }) => {
@@ -84,7 +101,31 @@ export const columns: ColumnDef<userLink>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={async () => {
+                const mutation = api.dashboard.deleteLink.useMutation();
+
+                mutation.mutate(
+                  { id: userLink.id },
+                  {
+                    onSuccess: (data) => {
+                      toast({
+                        title: "Deleted link",
+                        description: "Yeah yeah yeah.",
+                      });
+                    },
+                    onError: () => {
+                      toast({
+                        title: "Error deleting link",
+                        description: "Please try again in a few minutes.",
+                      });
+                    },
+                  }
+                );
+              }}
+            >
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

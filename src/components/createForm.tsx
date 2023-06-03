@@ -46,7 +46,6 @@ const CreateForm: NextPage = () => {
       setSlug(data.slug);
     },
     onError: () => {
-      alert("Error creating link: Try again.");
       toast({
         title: "Error creating link",
         description: "Please try again in a few minutes.",

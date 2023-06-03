@@ -106,6 +106,8 @@ model Link {
   url         String       // the user's input
   slug        String       @unique // vtu.bio/qwertyui   
   socialLink  socialLink?  
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt @default(now())
 
   @@index([id])
   @@index([userId])
