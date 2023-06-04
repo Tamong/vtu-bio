@@ -30,6 +30,10 @@ module.exports = {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        badge: {
+          DEFAULT: "hsl(var(--badge))",
+          foreground: "hsl(var(--badge-foreground))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",

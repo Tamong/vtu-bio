@@ -13,6 +13,9 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 47.4% 11.2%;
 
+    --badge: 217 19% 27%;
+    --badge-foreground: 213 27% 84%;
+
     --card: 0, 0% 100%;
     --card-foreground: 222.2, 47.4% 11.2%;
 
@@ -45,6 +48,9 @@
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 47.4% 11.2%;
+
+    --badge: 217 19% 27%;
+    --badge-foreground: 213 27% 84%;
 
     --card: 0, 0% 100%;
     --card-foreground: 222.2, 47.4% 11.2%;
