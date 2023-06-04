@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext, type NextPage } from "next";
+import { type GetServerSidePropsContext, type NextPage } from "next";
 import Layout from "~/components/layout";
 import Head from "next/head";
 import { SignInCard } from "~/components/signInCard";
