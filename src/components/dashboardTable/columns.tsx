@@ -54,7 +54,21 @@ export const columns: ColumnDef<userLink>[] = [
   },
   {
     accessorKey: "description",
-    header: "Description",
+    cell: ({ row }) => {
+      const userLink = row.original;
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="w- flex">
+              <div className="truncate">{userLink.description}</div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{userLink.description}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    },
   },
   {
     accessorKey: "Redirect URL",
@@ -63,24 +77,24 @@ export const columns: ColumnDef<userLink>[] = [
       return (
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
-              <button
-                onClick={async () => {
-                  await navigator.clipboard.writeText(
-                    `https://vtu.bio/${userLink.slug}`
-                  );
+            <TooltipTrigger
+              className="flex w-48"
+              onClick={async () => {
+                await navigator.clipboard.writeText(
+                  `https://vtu.bio/${userLink.slug}`
+                );
 
-                  toast({
-                    title: "Short Link copied!",
-                    description: `https://vtu.bio/${userLink.slug}`,
-                  });
-                }}
-              >
-                {userLink.url}
-              </button>
+                toast({
+                  title: "Short Link copied!",
+                  description: `https://vtu.bio/${userLink.slug}`,
+                });
+              }}
+            >
+              <div className="truncate">{userLink.url}</div>
             </TooltipTrigger>
+
             <TooltipContent>
-              <p>Copy to Clipboard</p>
+              <p>{userLink.url}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

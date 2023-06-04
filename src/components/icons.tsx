@@ -2,12 +2,15 @@ import {
   LucideProps,
   Moon,
   SunMedium,
+  Menu,
   Twitter,
   Laptop,
   Twitch,
   Youtube,
   type Icon as LucideIcon,
 } from "lucide-react";
+
+import { BsGoogle } from "react-icons/bs";
 
 export type Icon = LucideIcon;
 
@@ -18,6 +21,8 @@ export const Icons = {
   twitter: Twitter,
   twitch: Twitch,
   youtube: Youtube,
+  google: BsGoogle,
+  menu: Menu,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +35,7 @@ export const Icons = {
           <path d="M0 0h500v500H0z" />
         </clipPath>
       </defs>
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path
           d="M318.422 453.543 463.705 49.541c2.463-6.852-1.42-11.848-8.668-11.149L340.786 49.398c-7.247.699-15.076 6.848-17.47 13.723L188.843 449.216c-2.396 6.875 1.571 12.457 8.852 12.457h111.206c3.64 0 7.596-2.78 8.828-6.207l.693-1.923Z"
           fill="#536B8A"
@@ -43,7 +48,7 @@ export const Icons = {
             width="400%"
             height="400%"
             filterUnits="objectBoundingBox"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
             <feGaussianBlur
               xmlns="http://www.w3.org/2000/svg"
@@ -56,8 +61,8 @@ export const Icons = {
             />
             <feFlood
               xmlns="http://www.w3.org/2000/svg"
-              flood-color="#000"
-              flood-opacity=".65"
+              floodColor="#000"
+              floodOpacity=".65"
             />
             <feComposite
               xmlns="http://www.w3.org/2000/svg"
