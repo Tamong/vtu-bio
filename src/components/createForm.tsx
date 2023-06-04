@@ -16,6 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -41,9 +42,12 @@ const CreateForm: NextPage = () => {
     },
   });
 
+  const ctx = api.useContext();
+
   const { mutate } = api.create.createSimpleLink.useMutation({
     onSuccess: (data) => {
       setSlug(data.slug);
+      void ctx.dashboard.getUser.invalidate();
     },
     onError: () => {
       toast({
@@ -80,60 +84,65 @@ const CreateForm: NextPage = () => {
             </Button>
           </div>
         ) : (
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div className=" sm:flex sm:flex-row sm:space-x-8">
+          <div className="mt-4">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <div className=" sm:flex sm:flex-row sm:space-x-8">
+                  <FormField
+                    control={form.control}
+                    name="title"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Title</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Title" {...field} />
+                        </FormControl>
+                        <FormDescription>This is your title.</FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Description" {...field} />
+                        </FormControl>
+                        <FormDescription>
+                          This is your description.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
                 <FormField
                   control={form.control}
-                  name="title"
+                  name="url"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Title</FormLabel>
+                      <FormLabel>URL</FormLabel>
                       <FormControl>
-                        <Input placeholder="Title" {...field} />
-                      </FormControl>
-                      <FormDescription>This is your title.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Description" {...field} />
+                        <Input placeholder="URL" {...field} />
                       </FormControl>
                       <FormDescription>
-                        This is your description.
+                        This is your redirect URL.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              </div>
-
-              <FormField
-                control={form.control}
-                name="url"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>URL</FormLabel>
-                    <FormControl>
-                      <Input placeholder="URL" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your redirect URL.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit">Create</Button>
-            </form>
-          </Form>
+                <Button type="submit">Create</Button>
+              </form>
+            </Form>
+          </div>
         )}
       </div>
     </div>

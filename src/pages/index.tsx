@@ -3,6 +3,7 @@ import Head from "next/head";
 //import Link from "next/link";
 //import { api } from "~/utils/api";
 import Hero from "@/components/hero";
+import Trusts from "@/components/trusted";
 import Layout from "@/components/layout";
 
 const Home: NextPage = () => {
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
       </Head>
       <Layout>
         <Hero />
+        <Trusts />
       </Layout>
     </>
   );

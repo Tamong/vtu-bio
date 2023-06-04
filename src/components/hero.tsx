@@ -32,26 +32,18 @@ const Hero: NextPage = () => {
 
   return (
     <>
-      <div className="flex min-w-full flex-col items-center justify-evenly bg-inherit sm:flex-row">
-        <div className="flex flex-col justify-center">
-          <h1 className="flex flex-col text-4xl font-extrabold sm:text-[3rem]">
-            <span className="pb-4">Biography and</span>
-            <span className="pb-4">Short Links for</span>
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              vTubers!
-            </span>
+      <div className="my-32 flex min-w-full flex-col items-center justify-evenly bg-inherit md:flex-row">
+        <div className="flex flex-col items-center justify-center px-4 text-4xl font-extrabold md:items-start md:text-[3rem]">
+          <h1>Custom Bio and</h1>
+          <h1>Short Links for</h1>
+          <h1 className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            vTubers!
           </h1>
           <div className="flex flex-row">
-            <Link className="mr-4" href="/dashboard">
+            <Link className="mr-4" href="/signin">
               <Button className="mt-4 font-bold">
                 <ChevronRight size={16} />
                 Get Started
-              </Button>
-            </Link>
-            <Link href="/create">
-              <Button className="mt-4 bg-secondary font-bold">
-                <ChevronRight size={16} />
-                Create Link
               </Button>
             </Link>
           </div>
