@@ -34,11 +34,9 @@ const Hero: NextPage = () => {
     <>
       <div className="flex min-w-full flex-col items-center justify-evenly bg-inherit sm:flex-row">
         <div className="flex flex-col justify-center">
-          <h1 className="text-4xl font-extrabold sm:text-[3rem]">
-            Biography and
-            <br />
-            Short Links for
-            <br />
+          <h1 className="flex flex-col text-4xl font-extrabold sm:text-[3rem]">
+            <span className="pb-4">Biography and</span>
+            <span className="pb-4">Short Links for</span>
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               vTubers!
             </span>

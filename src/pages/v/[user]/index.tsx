@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
+import { Badge } from "@/components/ui/badge";
 
 const Home: NextPage<{ user: string }> = ({ user }) => {
   const { data } = api.profile.getUser.useQuery({ slug: user });
@@ -12,10 +13,6 @@ const Home: NextPage<{ user: string }> = ({ user }) => {
   if (!data) {
     return <div>Loading...</div>;
   }
-
-  const bgcolor = data.color
-    ? { backgroundImage: `linear-gradient(to bottom, ${data.color}, #cccccc)` }
-    : { backgroundImage: `linear-gradient(to bottom, #000000, #cccccc)` };
 
   return (
     <>
@@ -26,15 +23,27 @@ const Home: NextPage<{ user: string }> = ({ user }) => {
           content={data.bio ? data.bio : "Link Collection for Vtubers!"}
         />
       </Head>
-      <main className="flex min-h-screen flex-col items-center" style={bgcolor}>
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+      <main className="flex min-h-screen flex-col items-center">
+        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
           <Image
-            className="h-128 w-128 rounded-2xl shadow-2xl"
+            className="rounded-2xl shadow-2xl"
             src={data.image ? data.image : "/favicon.ico"}
+            height={128}
+            width={128}
             alt="Profile Picture"
           />
           <div className="flex flex-col items-center">
-            <h1 className="text-5xl font-extrabold tracking-tight text-white drop-shadow-2xl sm:text-[4rem]">
+            <h1
+              className="text-5xl font-extrabold tracking-tight text-foreground drop-shadow-2xl sm:text-[4rem]"
+              style={{
+                backgroundImage: data.color
+                  ? `linear-gradient(to bottom right, ${data.color}, #cccccc)`
+                  : `linear-gradient(to bottom right, #000000, #cccccc)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                paddingBottom: "0.2em",
+              }}
+            >
               {data.name}
             </h1>
             <h2 className="mt-2">
@@ -59,12 +68,8 @@ const Home: NextPage<{ user: string }> = ({ user }) => {
             <h2 className="mt-4">
               {data.tag &&
                 data.tag.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="mr-4 inline-block rounded-full bg-slate-700 px-3 text-slate-300"
-                  >
-                    {tag.name}
-                    {index !== data.tag.length - 1}
+                  <span key={index} className="mr-4 inline-block">
+                    <Badge variant="default">{tag.name}</Badge>
                   </span>
                 ))}
             </h2>
@@ -76,7 +81,7 @@ const Home: NextPage<{ user: string }> = ({ user }) => {
                 <Link
                   href={`/${link.slug}`}
                   target="_blank"
-                  className="flex flex-row items-center gap-12 px-4"
+                  className="flex flex-row items-center gap-12 px-4 text-foreground"
                 >
                   {link.title}
                   {link.socialLink && ` - ` + link.socialLink.provider}
