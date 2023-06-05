@@ -40,7 +40,7 @@ const Hero: NextPage = () => {
             vTubers!
           </h1>
           <div className="flex flex-row">
-            <Link className="mr-4" href="/signin">
+            <Link className="mr-4" href="/dashboard">
               <Button className="mt-4 font-bold">
                 <ChevronRight size={16} />
                 Get Started
