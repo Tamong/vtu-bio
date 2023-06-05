@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
-import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/router";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Navbar: NextPage = () => {
   const { data: sessionData } = useSession();
@@ -33,12 +33,13 @@ const Navbar: NextPage = () => {
             <Button
               onClick={
                 sessionData
-                  ? () => void signOut()
+                  ? () => void signOut({ callbackUrl: "/" })
                   : () => router.push("/signin")
               }
             >
               {sessionData ? "Sign out" : "Sign in"}
             </Button>
+            <ModeToggle />
           </div>
 
           <div className="flex items-center md:hidden">
@@ -56,7 +57,7 @@ const Navbar: NextPage = () => {
             <Button
               onClick={
                 sessionData
-                  ? () => void signOut()
+                  ? () => void signOut({ callbackUrl: "/" })
                   : () => router.push("/signin")
               }
             >
