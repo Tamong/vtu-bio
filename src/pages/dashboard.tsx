@@ -2,9 +2,6 @@ import { type GetServerSidePropsContext, type NextPage } from "next";
 import { api } from "~/utils/api";
 import Layout from "~/components/layout";
 import Head from "next/head";
-import { type userLink, columns } from "@/components/dashboardTable/columns";
-import { DataTable } from "@/components/dashboardTable/data-table";
-import CreateForm from "@/components/createForm";
 import {
   Dialog,
   DialogContent,
@@ -15,27 +12,24 @@ import {
 } from "@/components/ui/dialog";
 import { getServerSession } from "next-auth";
 import { authOptions } from "~/server/auth";
+import { LinkTable } from "@/components/dashboardTable";
 
-function getData(): userLink[] {
-  const { data } = api.dashboard.getUser.useQuery();
-
-  if (!data) {
-    return [];
-  }
-  const formattedLinks = data.links.map((link) => ({
-    id: link.id,
-    date: link.createdAt.toLocaleString(),
-    title: link.title,
-    description: link.description || null,
-    url: link.url,
-    slug: link.slug,
-  }));
-
-  return formattedLinks;
-}
+import { lazy, Suspense } from "react";
+const CreateForm = lazy(() => import("@/components/createForm"));
 
 const Dashboard: NextPage = () => {
-  const data = getData();
+  const { data } = api.dashboard.getUser.useQuery();
+
+  const formattedLinks = data
+    ? data.links.map((link) => ({
+        id: link.id,
+        date: link.createdAt.toLocaleString(),
+        title: link.title,
+        description: link.description || null,
+        url: link.url,
+        slug: link.slug,
+      }))
+    : [];
 
   return (
     <>
@@ -63,7 +57,9 @@ const Dashboard: NextPage = () => {
                     <DialogHeader>
                       <DialogTitle>Create Link</DialogTitle>
                       <DialogDescription>
-                        <CreateForm />
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <CreateForm />
+                        </Suspense>
                       </DialogDescription>
                     </DialogHeader>
                   </DialogContent>
@@ -71,9 +67,7 @@ const Dashboard: NextPage = () => {
               </div>
             </div>
 
-            <div>
-              <DataTable columns={columns} data={data} />
-            </div>
+            <LinkTable data={formattedLinks} />
           </div>
         </div>
       </Layout>
