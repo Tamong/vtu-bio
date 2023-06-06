@@ -8,7 +8,7 @@ import { Icons } from "@/components/icons";
 import { useRouter } from "next/router";
 import { ModeToggle } from "@/components/mode-toggle";
 
-const Navbar: NextPage = () => {
+const HomeNav: NextPage = () => {
   const { data: sessionData } = useSession();
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -70,4 +70,4 @@ const Navbar: NextPage = () => {
   );
 };
 
-export default Navbar;
+export default HomeNav;

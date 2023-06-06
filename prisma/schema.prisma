@@ -43,10 +43,10 @@ model Session {
 
 model User {
     id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
+    name          String    @default("username")
+    email         String    @unique
     emailVerified DateTime?
-    image         String?
+    image         String    @default("https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-260nw-1095249842.jpg")
     accounts      Account[]
     sessions      Session[]
     vtubers       VTuber[] 
