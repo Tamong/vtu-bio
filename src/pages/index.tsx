@@ -2,9 +2,9 @@ import { type GetServerSidePropsContext, type NextPage } from "next";
 import Head from "next/head";
 //import Link from "next/link";
 //import { api } from "~/utils/api";
+import HomeNav from "@/components/home-nav";
 import Hero from "@/components/hero";
 import Trusts from "@/components/trusted";
-import Layout from "@/components/layout";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/server/auth";
 
@@ -16,10 +16,11 @@ const Home: NextPage = () => {
         <meta name="description" content="Link Collection for Vtubers!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      <main>
+        <HomeNav />
         <Hero />
         <Trusts />
-      </Layout>
+      </main>
     </>
   );
 };

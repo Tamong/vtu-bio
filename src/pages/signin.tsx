@@ -1,11 +1,12 @@
 import { type GetServerSidePropsContext, type NextPage } from "next";
-import Layout from "~/components/layout";
 import Head from "next/head";
 import { SignInCard } from "~/components/signInCard";
 import { SignUpCard } from "~/components/signUpCard";
 import { getServerSession } from "next-auth";
 import { authOptions } from "~/server/auth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import HomeNav from "@/components/home-nav";
 
 const SignIn: NextPage = () => {
   return (
@@ -15,7 +16,8 @@ const SignIn: NextPage = () => {
         <meta name="description" content="Link Collection for Vtubers!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      
+        <HomeNav />
         <div className="container flex flex-col items-center justify-center gap-2">
           <div>
             <div className="my-2 flex min-w-full justify-between text-xl ">
@@ -36,7 +38,6 @@ const SignIn: NextPage = () => {
             </div>
           </div>
         </div>
-      </Layout>
     </>
   );
 };

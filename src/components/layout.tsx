@@ -1,15 +1,13 @@
-import Navbar from "@/components/navbar";
+import Header from "~/components/header";
 
 const Layout = (props: { children: React.ReactNode }) => {
   return (
     <>
-      <div className="flex h-screen flex-col items-center">
-        <div className="w-full flex-col">
-          <Navbar />
+      <div className="flex h-screen w-full flex-col items-center">
+        <div className="flex w-full flex-col">
+          <Header />
           <main className="mt-8 flex flex-col items-center gap-16">
-            <div className="flex max-w-6xl flex-col gap-y-16">
-              {props.children}
-            </div>
+            {props.children}
           </main>
         </div>
       </div>
