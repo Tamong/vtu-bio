@@ -5,6 +5,10 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 
+export const config = {
+  runtime: "edge", // this is a pre-requisite
+};
+
 export const dashboardRouter = createTRPCRouter({
   getUser: protectedProcedure.query(async ({ ctx }) => {
     const user = await ctx.prisma.user.findUnique({
