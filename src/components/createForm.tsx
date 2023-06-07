@@ -90,6 +90,22 @@ const CreateForm: NextPage = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4"
               >
+                <FormField
+                  control={form.control}
+                  name="url"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>URL</FormLabel>
+                      <FormControl>
+                        <Input placeholder="URL" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        This is your redirect URL.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <div className=" sm:flex sm:flex-row sm:space-x-8">
                   <FormField
                     control={form.control}
@@ -123,22 +139,6 @@ const CreateForm: NextPage = () => {
                   />
                 </div>
 
-                <FormField
-                  control={form.control}
-                  name="url"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>URL</FormLabel>
-                      <FormControl>
-                        <Input placeholder="URL" {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        This is your redirect URL.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 <Button type="submit">Create</Button>
               </form>
             </Form>

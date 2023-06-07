@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { useTheme } from "next-themes";
 import { signOut, useSession } from "next-auth/react";
@@ -32,16 +32,16 @@ const UserNav: React.FC = () => {
   };
 
   if (!sessionData) {
-    return <Skeleton className="rounded-full h-8 w-8"/>;
+    return <Skeleton className="h-8 w-8 rounded-full" />;
   }
   if (!sessionData.user) {
-    return <Skeleton className="rounded-full h-8 w-8"/>;
+    return <Skeleton className="h-8 w-8 rounded-full" />;
   }
   if (!sessionData.user.image) {
-    return <Skeleton className="rounded-full h-8 w-8"/>;
+    return <Skeleton className="h-8 w-8 rounded-full" />;
   }
   if (!sessionData.user.name) {
-    return <Skeleton className="rounded-full h-8 w-8"/>;
+    return <Skeleton className="h-8 w-8 rounded-full" />;
   }
 
   return (
@@ -57,7 +57,7 @@ const UserNav: React.FC = () => {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
+      <DropdownMenuContent className="w-48" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">
@@ -73,21 +73,10 @@ const UserNav: React.FC = () => {
           <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <CreditCard className="mr-2 h-4 w-4" />
-            <span>Billing</span>
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Settings className="mr-2 h-4 w-4" />
             <span>Settings</span>
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            <span>New Team</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Select onValueChange={(value) => handleThemeChange(value)}>
@@ -95,9 +84,9 @@ const UserNav: React.FC = () => {
                 <SelectValue placeholder="Theme" />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="system">System</SelectItem>
                 <SelectItem value="light">Light</SelectItem>
                 <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
               </SelectContent>
             </Select>
           </DropdownMenuItem>
@@ -110,7 +99,6 @@ const UserNav: React.FC = () => {
               Sign Out
             </button>
           </span>
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
