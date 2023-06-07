@@ -93,12 +93,13 @@ const UserNav: React.FC = () => {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>
-            <button onClick={() => void signOut({ callbackUrl: "/" })}>
-              Sign Out
-            </button>
-          </span>
+          <button
+            className="flex w-full items-center text-left"
+            onClick={() => void signOut({ callbackUrl: "/" })}
+          >
+            <LogOut className="mr-2 h-4 w-4" />
+            Sign Out
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
