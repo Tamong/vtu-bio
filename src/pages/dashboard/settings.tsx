@@ -8,7 +8,7 @@ import { authOptions } from "~/server/auth";
 import { lazy, Suspense } from "react";
 const DashLinks = lazy(() => import("./links"));
 
-const Dashboard: NextPage<{ user: string }> = ({ user }) => {
+const Dashboard: NextPage = () => {
   return (
     <>
       <Head>

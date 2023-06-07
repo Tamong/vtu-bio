@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { BsGoogle } from "react-icons/bs";
+import { RxSlash } from "react-icons/rx";
 
 export type Icon = LucideIcon;
 
@@ -22,6 +23,7 @@ export const Icons = {
   twitch: Twitch,
   youtube: Youtube,
   google: BsGoogle,
+  slash: RxSlash,
   menu: Menu,
   logo: (props: LucideProps) => (
     <svg
