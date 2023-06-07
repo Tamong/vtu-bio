@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { ModeToggle } from "@/components/mode-toggle";
 
 const HomeNav: NextPage = () => {
-  const { data: sessionData } = useSession();
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -30,15 +29,7 @@ const HomeNav: NextPage = () => {
           </div>
 
           <div className="hidden items-center md:flex">
-            <Button
-              onClick={
-                sessionData
-                  ? () => void signOut({ callbackUrl: "/" })
-                  : () => router.push("/signin")
-              }
-            >
-              {sessionData ? "Sign out" : "Sign in"}
-            </Button>
+            <Button onClick={() => router.push("/signin")}>Sign In</Button>
             <ModeToggle />
           </div>
 
@@ -54,15 +45,8 @@ const HomeNav: NextPage = () => {
       <div className={!open ? "hidden md:hidden" : "pb-4 md:hidden"}>
         <div className="xl:w-96">
           <div className="flex justify-end">
-            <Button
-              onClick={
-                sessionData
-                  ? () => void signOut({ callbackUrl: "/" })
-                  : () => router.push("/signin")
-              }
-            >
-              {sessionData ? "Sign out" : "Sign in"}
-            </Button>
+            <Button onClick={() => router.push("/signin")}>Sign In</Button>
+            <ModeToggle />
           </div>
         </div>
       </div>

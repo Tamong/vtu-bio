@@ -47,7 +47,7 @@ const CreateForm: NextPage = () => {
   const { mutate } = api.create.createSimpleLink.useMutation({
     onSuccess: (data) => {
       setSlug(data.slug);
-      void ctx.dashboard.getUser.invalidate();
+      void ctx.dashboard.getLinks.invalidate();
     },
     onError: () => {
       toast({
