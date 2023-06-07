@@ -28,6 +28,19 @@ export const dashboardRouter = createTRPCRouter({
     return user;
   }),
 
+  getLinks: protectedProcedure.query(async ({ ctx }) => {
+    const links = await ctx.prisma.link.findMany({
+      where: {
+        userId: ctx.session.user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return links;
+  }),
+
   deleteLink: protectedProcedure
     .input(z.object({ id: z.string().cuid() }))
     .mutation(async ({ ctx, input }) => {

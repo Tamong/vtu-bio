@@ -8,7 +8,7 @@ import { authOptions } from "~/server/auth";
 import { lazy, Suspense } from "react";
 const DashLinks = lazy(() => import("./links"));
 
-const Dashboard: NextPage<{ user: string }> = ({ user }) => {
+const Dashboard: NextPage = () => {
   return (
     <>
       <Head>
@@ -35,7 +35,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (!session) {
-    return { redirect: { destination: "/signin" } };
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
   }
 
   return {

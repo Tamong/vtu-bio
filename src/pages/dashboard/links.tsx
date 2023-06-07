@@ -16,10 +16,10 @@ import { lazy, Suspense } from "react";
 const CreateForm = lazy(() => import("@/components/createForm"));
 
 const DashLinks: React.FC = () => {
-  const { data } = api.dashboard.getUser.useQuery();
+  const { data } = api.dashboard.getLinks.useQuery();
 
   const formattedLinks = data
-    ? data.links.map((link) => ({
+    ? data.map((link) => ({
         id: link.id,
         date: link.createdAt.toLocaleString(),
         title: link.title,

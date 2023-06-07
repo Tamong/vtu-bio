@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { UserNav } from "./user-nav";
 import { Icons } from "@/components/icons";
 
-const NavBar: NextPage = () => {
+const MainNav: NextPage = () => {
   const router = useRouter();
   const pathComponents = router.pathname.split("/").slice(2);
 
@@ -54,4 +54,4 @@ const NavBar: NextPage = () => {
   );
 };
 
-export default NavBar;
+export default MainNav;

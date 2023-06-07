@@ -16,28 +16,28 @@ const SignIn: NextPage = () => {
         <meta name="description" content="Link Collection for Vtubers!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-        <HomeNav />
-        <div className="container flex flex-col items-center justify-center gap-2">
-          <div>
-            <div className="my-2 flex min-w-full justify-between text-xl ">
-              <div className="flex items-center justify-center ">
-                <Tabs defaultValue="signin" className="w-[400px]">
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="signin">Sign In</TabsTrigger>
-                    <TabsTrigger value="signup">Sign Up</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="signin">
-                    <SignInCard />
-                  </TabsContent>
-                  <TabsContent value="signup">
-                    <SignUpCard />
-                  </TabsContent>
-                </Tabs>
-              </div>
+
+      <HomeNav />
+      <div className="container flex flex-col items-center justify-center gap-2">
+        <div>
+          <div className="my-2 flex min-w-full justify-between text-xl ">
+            <div className="flex items-center justify-center ">
+              <Tabs defaultValue="signin" className="w-[400px]">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="signin">Sign In</TabsTrigger>
+                  <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                </TabsList>
+                <TabsContent value="signin">
+                  <SignInCard />
+                </TabsContent>
+                <TabsContent value="signup">
+                  <SignUpCard />
+                </TabsContent>
+              </Tabs>
             </div>
           </div>
         </div>
+      </div>
     </>
   );
 };
@@ -48,7 +48,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (session) {
-    return { redirect: { destination: "/dashboard" } };
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
   }
 
   return {
