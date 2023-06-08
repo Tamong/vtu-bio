@@ -34,10 +34,9 @@ interface Metatags {
 
 const getMetatags = async (url: string): Promise<Metatags> => {
   try {
-    const data: Metatags = await axios.get(
-      `https://api.dub.sh/metatags?url=${url}`
-    );
-
+    // In the future, make my own api for this
+    const response = await axios.get(`https://api.dub.sh/metatags?url=${url}`);
+    const data: Metatags = response.data as Metatags;
     return {
       title: data.title,
       description: data.description,
