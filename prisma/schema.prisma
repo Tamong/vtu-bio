@@ -72,6 +72,8 @@ model VTuber {
     association Association[] // hololive, nijisanji, independent, hololive, holoEN 
     tag         Tag[] // language, game, etc
     links       Link[] 
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
     
     @@index([userId])
 }
@@ -107,7 +109,7 @@ model Link {
   slug        String       @unique // vtu.bio/qwertyui   
   socialLink  socialLink?  
   createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt @default(now())
+  updatedAt   DateTime     @updatedAt 
 
   @@index([id])
   @@index([userId])

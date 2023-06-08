@@ -6,7 +6,6 @@ import { authOptions } from "~/server/auth";
 //import DashLinks from "~/pages/dashboard/links";
 
 import { lazy, Suspense } from "react";
-const DashLinks = lazy(() => import("./links"));
 
 const Dashboard: NextPage = () => {
   return (
@@ -20,7 +19,7 @@ const Dashboard: NextPage = () => {
         <div className="max-w-6xl">
           <div className="mx-auto hidden max-w-6xl px-4 md:block">
             <Suspense fallback={<div>Loading...</div>}>
-              <DashLinks />
+              <h1>Settings</h1>
             </Suspense>
           </div>
         </div>
