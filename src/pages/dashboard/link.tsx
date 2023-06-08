@@ -1,62 +1,52 @@
-import { type GetServerSidePropsContext, type NextPage } from "next";
+import { type NextPage } from "next";
 import Layout from "~/components/layout";
 import Head from "next/head";
-import { getServerSession } from "next-auth";
-import { authOptions } from "~/server/auth";
 
 import { lazy, Suspense } from "react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+
 import { api } from "~/utils/api";
 const LinkPage = lazy(() => import("@/components/dash/page"));
 
-const Dashboard: NextPage = () => {
-  const { data } = api.dashboard.getLinks.useQuery();
+const Link: NextPage = () => {
+  const router = useRouter();
+  const { status } = useSession();
 
-  const formattedLinks = data
-    ? data.map((link) => ({
-        id: link.id,
-        date: link.createdAt.toLocaleString(),
-        title: link.title,
-        description: link.description || null,
-        url: link.url,
-        slug: link.slug,
-      }))
-    : [];
+  if (status === "authenticated") {
+    const { data } = api.dashboard.getLinks.useQuery();
 
-  return (
-    <>
-      <Head>
-        <title>Dashboard - vtu.bio</title>
-        <meta name="description" content="Link Collection for Vtubers!" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <div className="max-w-6xl">
-          <div className="mx-auto hidden max-w-6xl px-4 md:block">
-            <Suspense>
-              <LinkPage data={formattedLinks} />
-            </Suspense>
+    const formattedLinks = data
+      ? data.map((link) => ({
+          id: link.id,
+          date: link.createdAt.toLocaleString(),
+          title: link.title,
+          description: link.description || null,
+          url: link.url,
+          slug: link.slug,
+        }))
+      : [];
+
+    return (
+      <>
+        <Head>
+          <title>Dashboard - vtu.bio</title>
+        </Head>
+        <Layout>
+          <div className="max-w-6xl">
+            <div className="mx-auto hidden max-w-6xl px-4 md:block">
+              <Suspense>
+                <LinkPage data={formattedLinks} />
+              </Suspense>
+            </div>
           </div>
-        </div>
-      </Layout>
-    </>
-  );
+        </Layout>
+      </>
+    );
+  } else if (status === "unauthenticated") {
+    void router.replace("/signin");
+  }
+  return null;
 };
 
-export default Dashboard;
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/signin",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}
+export default Link;

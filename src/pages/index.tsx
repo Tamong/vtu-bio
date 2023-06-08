@@ -3,8 +3,17 @@ import Head from "next/head";
 import HomeNav from "@/components/home-nav";
 import Hero from "@/components/hero";
 import Trusts from "@/components/trusted";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const { status } = useSession();
+  const router = useRouter();
+
+  if (status === "authenticated") {
+    void router.replace("/dashboard");
+  }
+
   return (
     <>
       <Head>

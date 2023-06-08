@@ -1,14 +1,20 @@
-import { type GetServerSidePropsContext, type NextPage } from "next";
+import { type NextPage } from "next";
 import Head from "next/head";
 import { SignInCard } from "~/components/signInCard";
 import { SignUpCard } from "~/components/signUpCard";
-import { getServerSession } from "next-auth";
-import { authOptions } from "~/server/auth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import HomeNav from "@/components/home-nav";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const SignIn: NextPage = () => {
+  const { status } = useSession();
+  const router = useRouter();
+
+  if (status === "authenticated") {
+    void router.replace("/dashboard");
+  }
   return (
     <>
       <Head>
@@ -43,20 +49,3 @@ const SignIn: NextPage = () => {
 };
 
 export default SignIn;
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/dashboard",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}
