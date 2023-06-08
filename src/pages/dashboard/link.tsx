@@ -5,6 +5,7 @@ import Head from "next/head";
 import { lazy, Suspense } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { fromNow } from "@/lib/utils";
 
 import { api } from "~/utils/api";
 const LinkPage = lazy(() => import("@/components/dash/page"));
@@ -13,13 +14,13 @@ const Link: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
 
-  if (status === "authenticated") {
-    const { data } = api.dashboard.getLinks.useQuery();
+  const { data } = api.dashboard.getLinks.useQuery();
 
+  if (status === "authenticated") {
     const formattedLinks = data
       ? data.map((link) => ({
           id: link.id,
-          date: link.createdAt.toLocaleString(),
+          date: fromNow(link.createdAt),
           title: link.title,
           description: link.description || null,
           url: link.url,

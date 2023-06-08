@@ -50,20 +50,34 @@ export const columns: ColumnDef<userLink>[] = [
   },
   {
     accessorKey: "title",
-    header: "Title",
+    cell: ({ row }) => {
+      const title = row.original.title;
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="flex w-32">
+              <div className="truncate">{title}</div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="flex max-w-[12rem] flex-wrap">{title}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    },
   },
   {
     accessorKey: "description",
     cell: ({ row }) => {
-      const userLink = row.original;
+      const description = row.original.description;
       return (
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger className="w- flex">
-              <div className="truncate">{userLink.description}</div>
+            <TooltipTrigger className="flex w-24">
+              <div className="truncate">{description}</div>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{userLink.description}</p>
+              <p className="flex max-w-[12rem] flex-wrap">{description}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

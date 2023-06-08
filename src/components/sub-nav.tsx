@@ -8,7 +8,6 @@ type props = {
 const SubNav: React.FC<props> = ({ sessionData }) => {
   const router = useRouter();
   const pathComponents = router.pathname.split("/").slice(1);
-  console.log(pathComponents);
 
   const isCurrentRoute = (route: string) => {
     const currentRoute = `/${pathComponents.join("/")}`;
