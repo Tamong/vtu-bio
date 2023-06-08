@@ -8,33 +8,29 @@ import { useSession } from "next-auth/react";
 
 const Dashboard: NextPage = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { status } = useSession();
 
-  if (!session) {
-    // Redirect to the dashboard page
-    router.replace("/signin");
-
-    return null; // Return null while the redirect happens
-  }
-
-  return (
-    <>
-      <Head>
-        <title>Dashboard - vtu.bio</title>
-        <meta name="description" content="Link Collection for Vtubers!" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <div className="max-w-6xl">
-          <div className="mx-auto hidden max-w-6xl px-4 md:block">
-            <Suspense fallback={<div>Loading...</div>}>
-              <h1>Hello</h1>
-            </Suspense>
+  if (status === "authenticated") {
+    return (
+      <>
+        <Head>
+          <title>Dashboard - vtu.bio</title>
+          <meta name="description" content="Link Collection for Vtubers!" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Layout>
+          <div className="max-w-6xl">
+            <div className="mx-auto hidden max-w-6xl px-4 md:block">
+              <p>Welcome to the dashboard!</p>
+            </div>
           </div>
-        </div>
-      </Layout>
-    </>
-  );
+        </Layout>
+      </>
+    );
+  } else if (status === "unauthenticated") {
+    router.replace("/signin");
+  }
+  return null;
 };
 
 export default Dashboard;
