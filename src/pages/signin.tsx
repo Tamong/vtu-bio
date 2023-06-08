@@ -1,4 +1,4 @@
-import { type GetServerSidePropsContext, type NextPage } from "next";
+import { type NextPage } from "next";
 import Head from "next/head";
 import { SignInCard } from "~/components/signInCard";
 import { SignUpCard } from "~/components/signUpCard";
@@ -7,16 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import HomeNav from "@/components/home-nav";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { getServerSession } from "next-auth";
-import { authOptions } from "~/server/auth";
 
 const SignIn: NextPage = () => {
   const { status } = useSession();
   const router = useRouter();
 
   if (status === "authenticated") {
-    router.replace("/dashboard");
+    void router.replace("/dashboard");
   }
   return (
     <>
@@ -51,45 +48,4 @@ const SignIn: NextPage = () => {
   );
 };
 
-export { SignIn };
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/dashboard",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}
-
-// Redirect function
-const redirect = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace("/dashboard");
-  }, []);
-
-  return null;
-};
-
-// Call the redirect function conditionally
-const ConditionalRedirect: NextPage = () => {
-  const { data: session } = useSession();
-
-  if (session) {
-    return redirect();
-  }
-
-  return <SignIn />;
-};
-
-export default ConditionalRedirect;
+export default SignIn;

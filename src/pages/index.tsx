@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   if (status === "authenticated") {
-    router.replace("/dashboard");
+    void router.replace("/dashboard");
   }
 
   return (

@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Layout from "~/components/layout";
 import Head from "next/head";
 
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
@@ -13,20 +13,20 @@ const Link: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
 
-  const { data } = api.dashboard.getLinks.useQuery();
-
-  const formattedLinks = data
-    ? data.map((link) => ({
-        id: link.id,
-        date: link.createdAt.toLocaleString(),
-        title: link.title,
-        description: link.description || null,
-        url: link.url,
-        slug: link.slug,
-      }))
-    : [];
-
   if (status === "authenticated") {
+    const { data } = api.dashboard.getLinks.useQuery();
+
+    const formattedLinks = data
+      ? data.map((link) => ({
+          id: link.id,
+          date: link.createdAt.toLocaleString(),
+          title: link.title,
+          description: link.description || null,
+          url: link.url,
+          slug: link.slug,
+        }))
+      : [];
+
     return (
       <>
         <Head>
@@ -44,7 +44,7 @@ const Link: NextPage = () => {
       </>
     );
   } else if (status === "unauthenticated") {
-    router.replace("/signin");
+    void router.replace("/signin");
   }
   return null;
 };

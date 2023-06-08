@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Layout from "~/components/layout";
 import Head from "next/head";
 
-import { lazy, Suspense, useEffect } from "react";
+//import { lazy, Suspense, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
@@ -28,7 +28,7 @@ const Dashboard: NextPage = () => {
       </>
     );
   } else if (status === "unauthenticated") {
-    router.replace("/signin");
+    void router.replace("/signin");
   }
   return null;
 };
