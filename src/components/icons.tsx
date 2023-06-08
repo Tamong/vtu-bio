@@ -7,6 +7,7 @@ import {
   Laptop,
   Twitch,
   Youtube,
+  VenetianMask,
   type Icon as LucideIcon,
 } from "lucide-react";
 
@@ -24,6 +25,7 @@ export const Icons = {
   youtube: Youtube,
   google: BsGoogle,
   slash: RxSlash,
+  mask: VenetianMask,
   menu: Menu,
   logo: (props: LucideProps) => (
     <svg
@@ -32,11 +34,7 @@ export const Icons = {
       width="300"
       height="300"
     >
-      <defs>
-        <clipPath id="a">
-          <path d="M0 0h500v500H0z" />
-        </clipPath>
-      </defs>
+      <defs></defs>
       <g clipPath="url(#a)">
         <path
           d="M318.422 453.543 463.705 49.541c2.463-6.852-1.42-11.848-8.668-11.149L340.786 49.398c-7.247.699-15.076 6.848-17.47 13.723L188.843 449.216c-2.396 6.875 1.571 12.457 8.852 12.457h111.206c3.64 0 7.596-2.78 8.828-6.207l.693-1.923Z"

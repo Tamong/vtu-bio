@@ -18,7 +18,7 @@ const Dashboard: NextPage = () => {
         <div className="max-w-6xl">
           <div className="mx-auto hidden max-w-6xl px-4 md:block">
             <Suspense fallback={<div>Loading...</div>}>
-              <h1>Hello</h1>
+              <h1>VTuber</h1>
             </Suspense>
           </div>
         </div>

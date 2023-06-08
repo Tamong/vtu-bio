@@ -3,8 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { UserNav } from "./user-nav";
 import { Icons } from "@/components/icons";
+import { Skeleton } from "./ui/skeleton";
+import { Fragment } from "react";
 
-const MainNav: NextPage = () => {
+type props = {
+  sessionData: any; // Replace 'any' with the actual type of sessionData
+};
+
+const MainNav: React.FC<props> = ({ sessionData }) => {
   const router = useRouter();
   const pathComponents = router.pathname.split("/").slice(2);
 
@@ -14,19 +20,17 @@ const MainNav: NextPage = () => {
         {/* Left Side */}
         <div className="flex list-none items-center md:space-x-3">
           <li>
-            <Link href="/" className="flex">
-              <h1 className="bg-gradient-to-r from-primary to-accent bg-clip-text text-2xl font-extrabold tracking-tight text-transparent drop-shadow-sm md:text-3xl">
-                vtu<span className=" text-foreground">.</span>bio
-              </h1>
+            <Link href="/dashboard" className="flex items-center">
+              <Icons.mask className="h-8 w-8 text-foreground" />
             </Link>
           </li>
 
           {pathComponents.map((path, index) => (
-            <>
+            <Fragment key={index}>
               <li>
-                <Icons.slash className="text-muted-foreground" />
+                <Icons.slash className="h-6 w-6 text-border" />
               </li>
-              <li key={index}>
+              <li>
                 <Link
                   href={`/dashboard/${pathComponents
                     .slice(0, index + 1)
@@ -37,18 +41,18 @@ const MainNav: NextPage = () => {
                 </Link>
               </li>
               {index < pathComponents.length - 1 && <Icons.slash />}
-            </>
+            </Fragment>
           ))}
         </div>
 
         {/* Right Side */}
-        <div className="hidden items-center md:flex ">
-          <UserNav />
-        </div>
-        {/* Mobile Menu */}
-        <div className="flex items-center md:hidden">
-          <UserNav />
-        </div>
+        {sessionData ? (
+          <div className="block items-center md:flex ">
+            <UserNav sessionData={sessionData} />
+          </div>
+        ) : (
+          <Skeleton className="h-8 w-8 rounded-full" />
+        )}
       </div>
     </>
   );

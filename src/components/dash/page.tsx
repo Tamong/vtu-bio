@@ -1,5 +1,3 @@
-import { type GetServerSidePropsContext } from "next";
-import { api } from "~/utils/api";
 import {
   Dialog,
   DialogContent,
@@ -8,27 +6,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { getServerSession } from "next-auth";
-import { authOptions } from "~/server/auth";
 import { LinkTable } from "~/components/dash";
 
 import { lazy, Suspense } from "react";
 const CreateForm = lazy(() => import("@/components/createForm"));
 
-const DashLinks: React.FC = () => {
-  const { data } = api.dashboard.getLinks.useQuery();
+type props = {
+  data: any; // Replace 'any' with the actual type of sessionData
+};
 
-  const formattedLinks = data
-    ? data.map((link) => ({
-        id: link.id,
-        date: link.createdAt.toLocaleString(),
-        title: link.title,
-        description: link.description || null,
-        url: link.url,
-        slug: link.slug,
-      }))
-    : [];
-
+const linkPage: React.FC<props> = ({ data }) => {
   return (
     <>
       <div className="max-w-6xl">
@@ -47,18 +34,16 @@ const DashLinks: React.FC = () => {
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>Create Link</DialogTitle>
-                    <DialogDescription>
-                      <Suspense fallback={<div>Loading...</div>}>
-                        <CreateForm />
-                      </Suspense>
-                    </DialogDescription>
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <CreateForm />
+                    </Suspense>
                   </DialogHeader>
                 </DialogContent>
               </Dialog>
             </div>
           </div>
           <div>
-            <LinkTable data={formattedLinks} />
+            <LinkTable data={data} />
           </div>
         </div>
       </div>
@@ -66,16 +51,4 @@ const DashLinks: React.FC = () => {
   );
 };
 
-export default DashLinks;
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  if (!session) {
-    return { redirect: { destination: "/signin" } };
-  }
-
-  return {
-    props: {},
-  };
-}
+export default linkPage;
