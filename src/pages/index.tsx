@@ -13,23 +13,21 @@ const Home: NextPage = () => {
   if (status === "authenticated") {
     void router.replace("/dashboard");
   }
-  if (status === "unauthenticated") {
-    return (
-      <>
-        <Head>
-          <title>vtu.bio</title>
-          <meta name="description" content="Link Collection for Vtubers!" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main>
-          <HomeNav />
-          <Hero />
-          <Trusts />
-        </main>
-      </>
-    );
-  }
-  return null;
+
+  return (
+    <>
+      <Head>
+        <title>vtu.bio</title>
+        <meta name="description" content="Link Collection for Vtubers!" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main>
+        <HomeNav />
+        <Hero />
+        <Trusts />
+      </main>
+    </>
+  );
 };
 
 export default Home;
