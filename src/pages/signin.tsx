@@ -7,8 +7,21 @@ import { authOptions } from "~/server/auth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import HomeNav from "@/components/home-nav";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const SignIn: NextPage = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (session) {
+    // Redirect to the dashboard page
+    router.replace("/dashboard");
+
+    return null; // Return null while the redirect happens
+  }
+
   return (
     <>
       <Head>
@@ -43,20 +56,3 @@ const SignIn: NextPage = () => {
 };
 
 export default SignIn;
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/dashboard",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}

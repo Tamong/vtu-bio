@@ -1,13 +1,24 @@
-import { type GetServerSidePropsContext, type NextPage } from "next";
+import { type NextPage } from "next";
 import Layout from "~/components/layout";
 import Head from "next/head";
-import { getServerSession } from "next-auth";
-import { authOptions } from "~/server/auth";
-//import DashLinks from "~/pages/dashboard/links";
 
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const Dashboard: NextPage = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  if (!session) {
+    // Redirect to the dashboard page
+    useEffect(() => {
+      router.replace("/signin");
+    }, []);
+
+    return null; // Return null while the redirect happens
+  }
+
   return (
     <>
       <Head>
@@ -29,15 +40,3 @@ const Dashboard: NextPage = () => {
 };
 
 export default Dashboard;
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  if (!session) {
-    return { redirect: { destination: "/signin" } };
-  }
-
-  return {
-    props: {},
-  };
-}
