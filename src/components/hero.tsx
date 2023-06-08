@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
 import { Icons } from "@/components/icons";
+import { useRouter } from "next/router";
 
 const Hero: NextPage = () => {
+  const router = useRouter();
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -39,13 +41,14 @@ const Hero: NextPage = () => {
           <h1 className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             vTubers!
           </h1>
-          <div className="flex flex-row">
-            <Link className="mr-4" href="/dashboard">
-              <Button className="mt-4 font-bold">
-                <ChevronRight size={16} />
-                Get Started
-              </Button>
-            </Link>
+          <div className="mr-4 flex flex-row">
+            <Button
+              className="mt-4 font-bold"
+              onClick={() => router.push("/dashboard")}
+            >
+              <ChevronRight size={16} />
+              Get Started
+            </Button>
           </div>
         </div>
         <div
