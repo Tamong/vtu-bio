@@ -26,11 +26,31 @@ const randomString = (length: number) => {
   return result;
 };
 
-const getMetatags = async (url: string) => {
-  // future update, make my own metatag grabber
-  // also update link grabbers
-  const response = await axios.get(`https://api.dub.sh/metatags?url=${url}`);
-  return response.data;
+interface Metatags {
+  title: string;
+  description: string;
+  image: string;
+}
+
+const getMetatags = async (url: string): Promise<Metatags> => {
+  try {
+    const data: Metatags = await axios.get(
+      `https://api.dub.sh/metatags?url=${url}`
+    );
+
+    return {
+      title: data.title,
+      description: data.description,
+      image: data.image,
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      title: "",
+      description: "",
+      image: "",
+    };
+  }
 };
 
 export const createRouter = createTRPCRouter({
@@ -44,7 +64,7 @@ export const createRouter = createTRPCRouter({
           userId: ctx.session.user.id,
           title: metatags.title || input.title,
           description: metatags.description || input.description,
-          image: metatags.image || null,
+          image: metatags.image || "",
           url: input.url,
           slug: randomString(7),
         },

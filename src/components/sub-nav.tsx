@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const SubNav: React.FC = () => {
+type props = {
+  sessionData: any; // Replace 'any' with the actual type of sessionData
+};
+
+const SubNav: React.FC<props> = ({ sessionData }) => {
   const router = useRouter();
   const pathComponents = router.pathname.split("/").slice(1);
 
