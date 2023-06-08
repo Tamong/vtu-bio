@@ -1,4 +1,5 @@
 import { z } from "zod";
+import axios from "axios";
 import {
   createTRPCRouter,
   //publicProcedure,
@@ -25,15 +26,25 @@ const randomString = (length: number) => {
   return result;
 };
 
+const getMetatags = async (url: string) => {
+  // future update, make my own metatag grabber
+  // also update link grabbers
+  const response = await axios.get(`https://api.dub.sh/metatags?url=${url}`);
+  return response.data;
+};
+
 export const createRouter = createTRPCRouter({
   createSimpleLink: protectedProcedure
     .input(formSchema)
     .mutation(async ({ ctx, input }) => {
+      const metatags = await getMetatags(input.url);
+
       const link = await ctx.prisma.link.create({
         data: {
           userId: ctx.session.user.id,
-          title: input.title,
-          description: input.description,
+          title: metatags.title || input.title,
+          description: metatags.description || input.description,
+          image: metatags.image || null,
           url: input.url,
           slug: randomString(7),
         },
