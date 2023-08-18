@@ -5,7 +5,7 @@ const Trusts: NextPage = () => {
   return (
     <>
       <div className="flex min-w-full flex-col items-center justify-evenly bg-inherit md:flex-row">
-        <div className="flex flex-col items-center justify-center gap-6 bg-background">
+        <div className="flex flex-col items-center justify-center gap-6">
           <h1 className="flex flex-row items-center justify-center text-4xl font-extrabold md:text-[2.25rem]">
             Trusted by the Best!
           </h1>

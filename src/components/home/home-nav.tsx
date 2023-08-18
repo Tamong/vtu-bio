@@ -17,7 +17,7 @@ const HomeNav: NextPage = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-background ">
+    <nav className="sticky top-0 z-50">
       <div className="mx-auto max-w-6xl px-4 pt-2">
         <div className="flex items-center justify-between pt-4">
           <div className="flex items-center justify-center space-x-4">

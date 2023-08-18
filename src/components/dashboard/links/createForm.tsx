@@ -28,7 +28,7 @@ const formSchema = z.object({
   url: z.string().url(),
 });
 
-const CreateForm: NextPage = () => {
+const CreateForm = () => {
   const { toast } = useToast();
   const [slug, setSlug] = useState("");
 
@@ -93,49 +93,42 @@ const CreateForm: NextPage = () => {
                   <FormItem>
                     <FormLabel>URL</FormLabel>
                     <FormControl>
-                      <Input placeholder="URL" {...field} />
+                      <Input placeholder="https://vtu.bio/" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is your redirect URL.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <div className=" sm:flex sm:flex-row sm:space-x-8">
-                <FormField
-                  control={form.control}
-                  name="title"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Title</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Title" {...field} />
-                      </FormControl>
-                      <FormDescription>This is your title.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Description" {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        This is your description.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Title" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Description" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-              <Button type="submit">Create</Button>
+              <Button className="w-full" type="submit">
+                Create Link
+              </Button>
             </form>
           </Form>
         </div>

@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import HomeNav from "@/components/home-nav";
-import Hero from "@/components/hero";
-import Trusts from "@/components/trusted";
+import HomeNav from "~/components/home/home-nav";
+import Hero from "~/components/home/hero";
+import Trusts from "~/components/home/trusted";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 

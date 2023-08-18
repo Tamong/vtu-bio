@@ -1,24 +1,22 @@
 import { type NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { UserNav } from "./user-nav";
 import { Icons } from "@/components/icons";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "../ui/skeleton";
 import { Fragment } from "react";
 
-type props = {
-  sessionData: any; // Replace 'any' with the actual type of sessionData
-};
-
-const MainNav: React.FC<props> = ({ sessionData }) => {
+const MainNav = () => {
+  const { data: sessionData } = useSession();
   const router = useRouter();
   const pathComponents = router.pathname.split("/").slice(2);
 
   return (
     <>
-      <div className="flex justify-between pb-2 pt-3 md:px-4 md:pb-4 md:pt-6">
+      <div className="flex h-16 items-center justify-between">
         {/* Left Side */}
-        <div className="flex list-none items-center md:space-x-3">
+        <div className="flex list-none items-center">
           <li>
             <Link href="/dashboard" className="flex items-center">
               <Icons.mask className="h-8 w-8 text-foreground" />
@@ -28,7 +26,7 @@ const MainNav: React.FC<props> = ({ sessionData }) => {
           {pathComponents.map((path, index) => (
             <Fragment key={index}>
               <li>
-                <Icons.slash className="h-6 w-6 text-border" />
+                <Icons.slash className="h-8 w-8 text-border/20" />
               </li>
               <li>
                 <Link
@@ -51,7 +49,7 @@ const MainNav: React.FC<props> = ({ sessionData }) => {
             <UserNav sessionData={sessionData} />
           </div>
         ) : (
-          <Skeleton className="h-8 w-8 rounded-full" />
+          <Skeleton className="h-9 w-9 rounded-full" />
         )}
       </div>
     </>

@@ -9,6 +9,14 @@ import {
   Youtube,
   VenetianMask,
   type Icon as LucideIcon,
+  Clipboard,
+  MoreVertical,
+  DotIcon,
+  AlignLeft,
+  ArrowDownWideNarrow,
+  ChevronDown,
+  ChevronUp,
+  Search,
 } from "lucide-react";
 
 import { BsGoogle } from "react-icons/bs";
@@ -26,7 +34,15 @@ export const Icons = {
   google: BsGoogle,
   slash: RxSlash,
   mask: VenetianMask,
+  clipboard: Clipboard,
+  more: MoreVertical,
+  dot: DotIcon,
+  alignleft: AlignLeft,
+  arrowdown: ArrowDownWideNarrow,
   menu: Menu,
+  down: ChevronDown,
+  up: ChevronUp,
+  search: Search,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

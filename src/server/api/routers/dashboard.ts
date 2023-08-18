@@ -28,18 +28,44 @@ export const dashboardRouter = createTRPCRouter({
     return user;
   }),
 
-  getLinks: protectedProcedure.query(async ({ ctx }) => {
-    const links = await ctx.prisma.link.findMany({
-      where: {
-        userId: ctx.session.user.id,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+  getLinks: protectedProcedure
+    .input(z.object({ filter: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const links = await ctx.prisma.link.findMany({
+        where: {
+          userId: ctx.session.user.id,
+          AND: {
+            OR: [
+              {
+                slug: {
+                  contains: input.filter,
+                },
+              },
+              {
+                url: {
+                  contains: input.filter,
+                },
+              },
+              {
+                title: {
+                  contains: input.filter,
+                },
+              },
+              {
+                description: {
+                  contains: input.filter,
+                },
+              },
+            ],
+          },
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
 
-    return links;
-  }),
+      return links;
+    }),
 
   deleteLink: protectedProcedure
     .input(z.object({ id: z.string().cuid() }))
@@ -49,10 +75,5 @@ export const dashboardRouter = createTRPCRouter({
           id: input.id,
         },
       });
-
-      return {
-        success: true,
-        message: "Link deleted",
-      };
     }),
 });

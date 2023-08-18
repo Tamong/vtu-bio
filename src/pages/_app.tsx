@@ -15,7 +15,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <SessionProvider session={session}>
-        <div className="flex h-screen flex-col bg-background">
+        <div className="flex h-auto min-h-screen flex-col bg-foreground/5">
           <Component {...pageProps} />
           <Toaster />
           <TailwindIndicator />
