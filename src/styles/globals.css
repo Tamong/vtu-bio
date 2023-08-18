@@ -10,8 +10,8 @@
     --muted: 210 40% 85%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
+    --popover: 205 90% 96%;
+    --popover-foreground: 204 100% 4%;
 
     --badge: 217 19% 27%;
     --badge-foreground: 213 27% 84%;
@@ -31,8 +31,8 @@
     --accent: 155 58% 54%;
     --accent-foreground: 204 100% 1%;
 
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 204 100% 1%;
+    --destructive: 354 81% 44%;
+    --destructive-foreground: 204 100% 4%;
 
     --ring: 215 20.2% 65.1%;
 
@@ -46,7 +46,7 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --popover: 205 0% 12%;
+    --popover: 205 0% 6%;
     --popover-foreground: 205 0% 94%;
 
     --badge: 217 19% 27%;
@@ -67,8 +67,8 @@
     --accent: 155 58% 54%;
     --accent-foreground: 204 100% 1%;
 
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 204 100% 1%;
+    --destructive: 354 81% 44%;
+    --destructive-foreground: 205 0% 94%;
 
     --ring: 215 20.2% 65.1%;
 

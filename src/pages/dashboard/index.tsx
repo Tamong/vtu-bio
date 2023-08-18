@@ -1,5 +1,5 @@
 import { type NextPage } from "next";
-import Layout from "~/components/layout";
+import Layout from "~/components/dashboard/layout";
 import Head from "next/head";
 
 //import { lazy, Suspense, useEffect } from "react";
@@ -14,15 +14,27 @@ const Dashboard: NextPage = () => {
     return (
       <>
         <Head>
-          <title>Dashboard - vtu.bio</title>
+          <title>Overview - vtu.bio</title>
           <meta name="description" content="Link Collection for Vtubers!" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>
-          <div className="max-w-6xl">
-            <div className="mx-auto hidden max-w-6xl px-4 md:block">
-              <p>Welcome to the dashboard!</p>
+          {/* Header */}
+          <div className="flex h-32 w-full items-center border-b bg-background">
+            <div className="w-full  items-center">
+              <div className=" mx-auto flex max-w-screen-xl items-center justify-between px-2.5 lg:px-20">
+                {/* Left Side */}
+                <div className="flex items-center">
+                  <h1 className="flex text-3xl font-semibold drop-shadow-sm">
+                    Dashboard
+                  </h1>
+                </div>
+              </div>
             </div>
+          </div>
+          {/* Body */}
+          <div className="mx-auto hidden max-w-6xl px-4 md:block">
+            <p>Welcome to the dashboard!</p>
           </div>
         </Layout>
       </>

@@ -1,10 +1,10 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { SignInCard } from "~/components/signInCard";
-import { SignUpCard } from "~/components/signUpCard";
+import { SignInCard } from "~/components/signup/signInCard";
+import { SignUpCard } from "~/components/signup/signUpCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import HomeNav from "@/components/home-nav";
+import HomeNav from "~/components/home/home-nav";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
