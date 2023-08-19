@@ -42,7 +42,7 @@ const FilterPanel: React.FC<Props> = ({ setFilter }) => {
 
   return (
     <>
-      <div className="h-80 w-full rounded-lg border bg-background p-4">
+      <div className="h-80 rounded-lg border bg-background p-4">
         <h1 className="pb-2.5 font-medium">Filter</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -63,7 +63,7 @@ const FilterPanel: React.FC<Props> = ({ setFilter }) => {
                     >
                       <Icons.search className="h-4 w-4" />
                       <input
-                        className="ml-2 w-full border-none bg-background outline-none"
+                        className="ml-2 max-w-2xl border-none bg-background outline-none"
                         placeholder="Search..."
                         {...field}
                       />

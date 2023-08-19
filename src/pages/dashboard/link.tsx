@@ -13,6 +13,7 @@ const CreateLink = lazy(
 );
 const LinkCard = lazy(() => import("~/components/dashboard/links/LinkCard"));
 const SortBy = lazy(() => import("~/components/dashboard/links/sortBy"));
+const FilterBy = lazy(() => import("~/components/dashboard/links/filterBy"));
 const FilterPanel = lazy(
   () => import("~/components/dashboard/links/filterPanel")
 );
@@ -73,10 +74,17 @@ const Link: NextPage = () => {
 
           <div className="mx-auto w-full max-w-screen-xl justify-center  gap-5 pt-2.5  lg:px-20">
             {/* Top Menu */}
-            <div className="flex justify-end px-2 py-6 lg:px-0">
-              <Suspense fallback={<div>Loading...</div>}>
-                <SortBy />
-              </Suspense>
+            <div className="flex items-center justify-between px-2 py-6 lg:justify-end lg:px-0">
+              <div className="block lg:hidden">
+                <Suspense fallback={<div>Loading...</div>}>
+                  <FilterBy setFilter={setFilter} />
+                </Suspense>
+              </div>
+              <div className="">
+                <Suspense fallback={<div>Loading...</div>}>
+                  <SortBy />
+                </Suspense>
+              </div>
             </div>
 
             {/* Content */}
@@ -86,7 +94,7 @@ const Link: NextPage = () => {
                   <FilterPanel setFilter={setFilter} />
                 </Suspense>
               </div>
-              <div className="grid gap-2.5 px-2 lg:col-span-5 lg:col-start-3 lg:px-0">
+              <div className="grid max-h-24 gap-2.5 px-2 lg:col-span-5 lg:col-start-3 lg:px-0">
                 {data
                   ? data?.map((link) => (
                       <Suspense key={link.id}>
