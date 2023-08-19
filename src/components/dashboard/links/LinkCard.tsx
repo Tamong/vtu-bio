@@ -60,7 +60,7 @@ const LinkCard: React.FC<Props> = ({ data }) => {
 
   return (
     <>
-      <Card className="h-[4.5rem] border-none bg-background drop-shadow-lg">
+      <Card className="h-[4.5rem] w-full border-none bg-background drop-shadow-lg">
         <CardContent>
           <div className="mx-auto flex items-center justify-between">
             <div>

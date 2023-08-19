@@ -17,6 +17,7 @@ import {
   ChevronDown,
   ChevronUp,
   Search,
+  Filter,
 } from "lucide-react";
 
 import { BsGoogle } from "react-icons/bs";
@@ -43,6 +44,7 @@ export const Icons = {
   down: ChevronDown,
   up: ChevronUp,
   search: Search,
+  filter: Filter,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
