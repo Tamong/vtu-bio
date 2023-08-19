@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import {
   DropdownMenu,
