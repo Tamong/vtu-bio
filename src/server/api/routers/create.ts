@@ -68,7 +68,6 @@ export const createRouter = createTRPCRouter({
           slug: randomString(7),
         },
       });
-
       return link;
     }),
 });

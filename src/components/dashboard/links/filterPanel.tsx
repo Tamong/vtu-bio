@@ -44,7 +44,7 @@ const FilterPanel: React.FC<Props> = ({ setFilter }) => {
 
   return (
     <>
-      <div className="h-80 rounded-lg border bg-background p-4">
+      <div className="h-80 rounded-lg border bg-light p-4">
         <h1 className="pb-2.5 font-medium">Filter</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -56,7 +56,7 @@ const FilterPanel: React.FC<Props> = ({ setFilter }) => {
                   <FormControl>
                     <div
                       className="flex h-10 items-center  rounded-md 
-                    border border-input bg-background px-3 py-2 
+                    border border-input px-3 py-2 
                     text-sm ring-offset-background file:border-0
                     file:bg-transparent file:text-sm file:font-medium 
                     placeholder:text-muted-foreground focus-visible:outline-none 
@@ -65,7 +65,7 @@ const FilterPanel: React.FC<Props> = ({ setFilter }) => {
                     >
                       <Icons.search className="h-4 w-4" />
                       <input
-                        className="ml-2 max-w-2xl border-none bg-background outline-none"
+                        className="ml-2 max-w-2xl border-none bg-transparent outline-none"
                         placeholder="Search..."
                         {...field}
                       />

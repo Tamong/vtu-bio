@@ -62,11 +62,11 @@ const LinkCard: React.FC<Props> = ({ data }) => {
 
   return (
     <>
-      <Card className="h-[4.5rem] w-full border-none bg-background drop-shadow-lg">
+      <Card className="flex h-20 items-center justify-between border-none bg-light px-2 drop-shadow-lg">
         <CardContent>
-          <div className="mx-auto flex items-center justify-between">
+          <div className="mx-auto flex items-center">
             <div>
-              <div className="flex w-52 flex-row items-center justify-between gap-2">
+              <div className="flex w-56 flex-row items-center justify-between gap-2 font-medium">
                 <Link
                   target="_blank"
                   key={data.id}
@@ -103,41 +103,43 @@ const LinkCard: React.FC<Props> = ({ data }) => {
                 </div>
               </div>
             </div>
-            <div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="h-8 w-8 p-0">
-                    <span className="sr-only">Open menu</span>
-                    <Icons.more className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem
-                    onClick={async () => {
-                      await navigator.clipboard.writeText(
-                        `https://vtu.bio/${data.slug}`
-                      );
+          </div>
+        </CardContent>
+        <CardContent>
+          <div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <Icons.more className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(
+                      `https://vtu.bio/${data.slug}`
+                    );
 
-                      toast({
-                        title: "Link to your clipboard!",
-                        description: `https://vtu.bio/${data.slug}`,
-                      });
-                    }}
-                  >
-                    Copy link
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="focus:bg-destructive focus:text-destructive-foreground"
-                    onClick={async () => {
-                      onSubmitDelete(data.id);
-                    }}
-                  >
-                    Delete
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+                    toast({
+                      title: "Link to your clipboard!",
+                      description: `https://vtu.bio/${data.slug}`,
+                    });
+                  }}
+                >
+                  Copy link
+                </DropdownMenuItem>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem
+                  className="focus:bg-destructive focus:text-destructive-foreground"
+                  onClick={async () => {
+                    onSubmitDelete(data.id);
+                  }}
+                >
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </CardContent>
       </Card>
