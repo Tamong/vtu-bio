@@ -53,8 +53,8 @@ const Link: NextPage = () => {
         </Head>
         <Layout>
           {/* Header */}
-          <div className="flex h-32 w-full items-center border-b bg-background">
-            <div className="w-full  items-center">
+          <div className="flex h-32 w-full items-center border-b bg-light">
+            <div className="w-full items-center">
               <div className=" mx-auto flex max-w-screen-xl items-center justify-between px-2.5 lg:px-20">
                 {/* Left Side */}
                 <div className="flex items-center">
@@ -72,7 +72,7 @@ const Link: NextPage = () => {
           </div>
           {/* Body */}
 
-          <div className="mx-auto w-full max-w-screen-xl justify-center  gap-5 pt-2.5  lg:px-20">
+          <div className="mx-auto h-fit w-full max-w-screen-xl justify-center  gap-5 pt-2.5  lg:px-20">
             {/* Top Menu */}
             <div className="flex items-center justify-between px-2 py-6 lg:justify-end lg:px-0">
               <div className="block lg:hidden">
@@ -94,7 +94,7 @@ const Link: NextPage = () => {
                   <FilterPanel setFilter={setFilter} />
                 </Suspense>
               </div>
-              <div className="grid max-h-24 gap-2.5 px-2 lg:col-span-5 lg:col-start-3 lg:px-0">
+              <div className="grid h-20 gap-2.5 px-2 lg:col-span-5 lg:col-start-3 lg:px-0">
                 {data
                   ? data?.map((link) => (
                       <Suspense key={link.id}>
