@@ -18,19 +18,6 @@ const FilterPanel = lazy(
   () => import("~/components/dashboard/links/filterPanel")
 );
 
-type link = {
-  createdAt: Date;
-  updatedAt: Date;
-  title: string;
-  description: string | null;
-  image: string;
-  url: string;
-  slug: string;
-  id: string;
-  userId: string | null;
-  vtuberId: string | null;
-};
-
 const Link: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
@@ -39,11 +26,11 @@ const Link: NextPage = () => {
 
   const { data } = api.dashboard.getLinks.useQuery({ filter: filter });
 
-  const [sortBy, setSortBy] = useState("date");
+  //const [sortBy, setSortBy] = useState("date");
 
-  const handleSort = (value: string) => {
-    setSortBy(value);
-  };
+  //const handleSort = (value: string) => {
+  //  setSortBy(value);
+  //};
 
   if (status === "authenticated" || status === "loading") {
     return (

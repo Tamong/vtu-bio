@@ -5,6 +5,7 @@ import {
   //publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
+import { nanoid } from "@/lib/utils";
 
 export const config = {
   runtime: "edge", // this is a pre-requisite
@@ -16,16 +17,6 @@ const formSchema = z.object({
   url: z.string().url(),
 });
 
-const randomString = (length: number) => {
-  const chars =
-    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let result = "";
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
-};
-
 interface Metatags {
   title: string;
   description: string;
@@ -35,7 +26,7 @@ interface Metatags {
 const getMetatags = async (url: string): Promise<Metatags> => {
   try {
     // In the future, make my own api for this
-    const response = await axios.get(`https://api.dub.sh/metatags?url=${url}`);
+    const response = await axios.get(`https://vtu.bio/metatags?url=${url}`);
     const data: Metatags = response.data as Metatags;
     return {
       title: data.title,
@@ -65,7 +56,7 @@ export const createRouter = createTRPCRouter({
           description: metatags.description || input.description,
           image: metatags.image || "",
           url: input.url,
-          slug: randomString(7),
+          slug: nanoid(),
         },
       });
       return link;
