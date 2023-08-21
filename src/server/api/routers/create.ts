@@ -26,7 +26,7 @@ interface Metatags {
 const getMetatags = async (url: string): Promise<Metatags> => {
   try {
     // In the future, make my own api for this
-    const response = await axios.get(`https://vtu.bio/metatags?url=${url}`);
+    const response = await axios.get(`https://vtu.bio/api/metatags?url=${url}`);
     const data: Metatags = response.data as Metatags;
     return {
       title: data.title,
