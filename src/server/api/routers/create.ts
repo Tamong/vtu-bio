@@ -56,10 +56,10 @@ export const createRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       //const { data } = await api.tags.createMetatags.useQuery(input);
       //const { title, description, image } = data as MetaTagsResponse;
-      const response = axios.get(
-        "https://vtu.bio/api/metatags?url=" + input.url
+      const response = await axios.get(
+        `https://vtu.bio/api/metatags?url=${input.url}`
       );
-      const data = (await response).data;
+      const data: Metatags = response.data as Metatags;
 
       const link = await ctx.prisma.link.create({
         data: {
