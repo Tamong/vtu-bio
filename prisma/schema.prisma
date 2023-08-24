@@ -111,6 +111,7 @@ model Link {
   socialLink  socialLink?  
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt 
+  clicks      Int          @default(0)
 
   @@index([id])
   @@index([userId])

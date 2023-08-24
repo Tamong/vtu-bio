@@ -27,6 +27,7 @@ type link = {
   id: string;
   userId: string | null;
   vtuberId: string | null;
+  clicks: number;
 };
 
 type Props = {
@@ -99,6 +100,10 @@ const LinkCard: React.FC<Props> = ({ data }) => {
                   </CardDescription>
                   <CardDescription className="w-48 truncate sm:w-64">
                     {data.url}
+                  </CardDescription>
+
+                  <CardDescription className="w-48 truncate sm:w-64">
+                    {data.clicks} clicks
                   </CardDescription>
                 </div>
               </div>

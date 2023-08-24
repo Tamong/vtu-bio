@@ -6,6 +6,7 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 import { nanoid } from "@/lib/utils";
+import { api } from "@/utils/api";
 
 export const config = {
   runtime: "edge", // this is a pre-requisite
@@ -43,18 +44,29 @@ const getMetatags = async (url: string): Promise<Metatags> => {
   }
 };
 
+type MetaTagsResponse = {
+  title: string;
+  description: string;
+  image: string | null;
+};
+
 export const createRouter = createTRPCRouter({
   createSimpleLink: protectedProcedure
     .input(formSchema)
     .mutation(async ({ ctx, input }) => {
-      const metatags = await getMetatags(input.url);
+      //const { data } = await api.tags.createMetatags.useQuery(input);
+      //const { title, description, image } = data as MetaTagsResponse;
+      const response = axios.get(
+        "https://vtu.bio/api/metatags?url=" + input.url
+      );
+      const data = (await response).data;
 
       const link = await ctx.prisma.link.create({
         data: {
           userId: ctx.session.user.id,
-          title: metatags.title || input.title,
-          description: metatags.description || input.description,
-          image: metatags.image || "",
+          title: data.title || input.title,
+          description: data.description || input.description,
+          image: data.image || "",
           url: input.url,
           slug: nanoid(),
         },
