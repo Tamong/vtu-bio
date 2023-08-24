@@ -3,7 +3,7 @@ import { redirectRouter } from "~/server/api/routers/redirect";
 import { createRouter } from "~/server/api/routers/create";
 import { createTRPCRouter } from "~/server/api/trpc";
 import { dashboardRouter } from "./routers/dashboard";
-
+import { tagsRouter } from "./routers/tags";
 /**
  * This is the primary router for your server.
  *
@@ -14,6 +14,7 @@ export const appRouter = createTRPCRouter({
   redirect: redirectRouter,
   create: createRouter,
   dashboard: dashboardRouter,
+  tags: tagsRouter,
 });
 
 // export type definition of API

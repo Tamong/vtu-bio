@@ -5,6 +5,8 @@ import {
   //publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
+import { nanoid } from "@/lib/utils";
+import { api } from "@/utils/api";
 
 export const config = {
   runtime: "edge", // this is a pre-requisite
@@ -16,16 +18,6 @@ const formSchema = z.object({
   url: z.string().url(),
 });
 
-const randomString = (length: number) => {
-  const chars =
-    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let result = "";
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
-};
-
 interface Metatags {
   title: string;
   description: string;
@@ -35,7 +27,7 @@ interface Metatags {
 const getMetatags = async (url: string): Promise<Metatags> => {
   try {
     // In the future, make my own api for this
-    const response = await axios.get(`https://api.dub.sh/metatags?url=${url}`);
+    const response = await axios.get(`https://vtu.bio/api/metatags?url=${url}`);
     const data: Metatags = response.data as Metatags;
     return {
       title: data.title,
@@ -52,20 +44,31 @@ const getMetatags = async (url: string): Promise<Metatags> => {
   }
 };
 
+type MetaTagsResponse = {
+  title: string;
+  description: string;
+  image: string | null;
+};
+
 export const createRouter = createTRPCRouter({
   createSimpleLink: protectedProcedure
     .input(formSchema)
     .mutation(async ({ ctx, input }) => {
-      const metatags = await getMetatags(input.url);
+      //const { data } = await api.tags.createMetatags.useQuery(input);
+      //const { title, description, image } = data as MetaTagsResponse;
+      const response = await axios.get(
+        `https://vtu.bio/api/metatags?url=${input.url}`
+      );
+      const data: Metatags = response.data as Metatags;
 
       const link = await ctx.prisma.link.create({
         data: {
           userId: ctx.session.user.id,
-          title: metatags.title || input.title,
-          description: metatags.description || input.description,
-          image: metatags.image || "",
+          title: data.title || input.title,
+          description: data.description || input.description,
+          image: data.image || "",
           url: input.url,
-          slug: randomString(7),
+          slug: nanoid(),
         },
       });
       return link;

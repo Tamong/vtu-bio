@@ -11,25 +11,14 @@ import { api } from "~/utils/api";
 const CreateLink = lazy(
   () => import("~/components/dashboard/links/createLink")
 );
+
+import LinkCardSkeleton from "~/components/dashboard/links/LinkCardSkeleton";
 const LinkCard = lazy(() => import("~/components/dashboard/links/LinkCard"));
 const SortBy = lazy(() => import("~/components/dashboard/links/sortBy"));
 const FilterBy = lazy(() => import("~/components/dashboard/links/filterBy"));
 const FilterPanel = lazy(
   () => import("~/components/dashboard/links/filterPanel")
 );
-
-type link = {
-  createdAt: Date;
-  updatedAt: Date;
-  title: string;
-  description: string | null;
-  image: string;
-  url: string;
-  slug: string;
-  id: string;
-  userId: string | null;
-  vtuberId: string | null;
-};
 
 const Link: NextPage = () => {
   const router = useRouter();
@@ -41,8 +30,20 @@ const Link: NextPage = () => {
 
   const [sortBy, setSortBy] = useState("date");
 
-  const handleSort = (value: string) => {
-    setSortBy(value);
+  const handleSortBy = (sortBy: string) => {
+    setSortBy(sortBy);
+    if (!data) return;
+
+    if (sortBy === "date") {
+      data.sort((a, b) => {
+        return b.createdAt.getTime() - a.createdAt.getTime();
+      });
+    }
+    if (sortBy === "clicks") {
+      data.sort((a, b) => {
+        return b.clicks - a.clicks;
+      });
+    }
   };
 
   if (status === "authenticated" || status === "loading") {
@@ -82,7 +83,7 @@ const Link: NextPage = () => {
               </div>
               <div className="">
                 <Suspense fallback={<div>Loading...</div>}>
-                  <SortBy />
+                  <SortBy sortBy={sortBy} handleSortBy={handleSortBy} />
                 </Suspense>
               </div>
             </div>
@@ -95,13 +96,20 @@ const Link: NextPage = () => {
                 </Suspense>
               </div>
               <div className="grid h-20 gap-2.5 px-2 lg:col-span-5 lg:col-start-3 lg:px-0">
-                {data
-                  ? data?.map((link) => (
-                      <Suspense key={link.id}>
-                        <LinkCard key={link.id} data={link} />
-                      </Suspense>
-                    ))
-                  : null}
+                {data ? (
+                  data?.map((link) => (
+                    <Suspense key={link.id}>
+                      <LinkCard key={link.id} data={link} />
+                    </Suspense>
+                  ))
+                ) : (
+                  <>
+                    <LinkCardSkeleton />
+                    <LinkCardSkeleton />
+                    <LinkCardSkeleton />
+                    <LinkCardSkeleton />
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Layout from "~/components/dashboard/layout";
 import Head from "next/head";
+import { api } from "~/utils/api";
 
 //import { lazy, Suspense, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -9,6 +10,10 @@ import { useSession } from "next-auth/react";
 const Dashboard: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
+
+  const { data } = api.tags.createMetatags.useQuery({
+    url: "https://utdallas.edu/",
+  });
 
   if (status === "authenticated") {
     return (
