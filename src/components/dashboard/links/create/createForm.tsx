@@ -102,7 +102,7 @@ const CreateForm = () => {
     });
   };
   return (
-    <div className="scrollbar-hide relative grid max-h-[min(906px,_90vh)] min-w-[90dvh] gap-5 overflow-auto  md:grid-cols-2 md:overflow-hidden">
+    <div className="scrollbar-hide relative grid  gap-5 overflow-auto  md:grid-cols-2 md:overflow-hidden">
       <div>
         <div className="flex justify-center text-xl font-medium">
           Create a new Link
@@ -135,8 +135,8 @@ const CreateForm = () => {
           </Form>
         </div>
       </div>
-      <div className="flex flex-col">
-        <div className="text-xl font-medium">Preview</div>
+      <div className="flex w-full flex-col gap-2">
+        <div className="flex justify-center text-xl font-medium">Preview</div>
         <Twitter
           title={form.getValues("title")}
           description={form.getValues("description")}

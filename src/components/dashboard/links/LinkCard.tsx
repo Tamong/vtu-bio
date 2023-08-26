@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 import { toast } from "@/components/ui/use-toast";
 import { Icons } from "@/components/icons";
@@ -98,12 +99,11 @@ const LinkCard: React.FC<Props> = ({ data }) => {
                   <CardDescription>
                     <Icons.dot className="h-4 w-4" />
                   </CardDescription>
-                  <CardDescription className="w-48 truncate sm:w-64">
+                  <CardDescription className="block w-44 truncate sm:hidden sm:w-64">
                     {data.url}
                   </CardDescription>
-
-                  <CardDescription className="w-48 truncate sm:w-64">
-                    {data.clicks} clicks
+                  <CardDescription className="hidden w-44 truncate sm:block sm:w-64">
+                    {data.url} clicks
                   </CardDescription>
                 </div>
               </div>
@@ -111,7 +111,13 @@ const LinkCard: React.FC<Props> = ({ data }) => {
           </div>
         </CardContent>
         <CardContent>
-          <div>
+          <div className="flex flex-row items-center">
+            <CardDescription className="block w-full sm:hidden">
+              <Badge variant="outline">{data.clicks}</Badge>
+            </CardDescription>
+            <CardDescription className="hidden w-full sm:block ">
+              <Badge variant="outline">{data.clicks} clicks</Badge>
+            </CardDescription>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-8 w-8 p-0">
