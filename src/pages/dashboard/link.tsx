@@ -66,7 +66,9 @@ const Link: NextPage = () => {
 
                 {/* Right Side */}
                 <div className="flex items-center">
-                  <CreateLink />
+                  <Suspense>
+                    <CreateLink />
+                  </Suspense>
                 </div>
               </div>
             </div>
