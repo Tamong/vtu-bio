@@ -50,7 +50,8 @@ const Link: NextPage = () => {
     return (
       <>
         <Head>
-          <title>Links - vtu.bio</title>
+          <title>Links - vtu.bio</title>{" "}
+          <meta name="description" content="Links" />
         </Head>
         <Layout>
           {/* Header */}
@@ -66,7 +67,9 @@ const Link: NextPage = () => {
 
                 {/* Right Side */}
                 <div className="flex items-center">
-                  <CreateLink />
+                  <Suspense>
+                    <CreateLink />
+                  </Suspense>
                 </div>
               </div>
             </div>

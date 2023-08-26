@@ -11,10 +11,6 @@ const Dashboard: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
 
-  const { data } = api.tags.createMetatags.useQuery({
-    url: "https://utdallas.edu/",
-  });
-
   if (status === "authenticated") {
     return (
       <>

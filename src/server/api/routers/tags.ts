@@ -198,9 +198,9 @@ const inputSchema = z.object({
 });
 
 export const tagsRouter = createTRPCRouter({
-  createMetatags: protectedProcedure
+  getMetatags: protectedProcedure
     .input(inputSchema)
-    .query(async ({ ctx, input }) => {
+    .mutation(async ({ input }) => {
       const metatags = await getMetaTags(input.url);
       return metatags;
     }),
