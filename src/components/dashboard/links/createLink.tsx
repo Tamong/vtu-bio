@@ -16,7 +16,7 @@ import { Drawer } from "vaul";
 const CreateLink = () => {
   return (
     <>
-      <div className="block sm:hidden">
+      <div className=" block sm:hidden">
         <Drawer.Root shouldScaleBackground>
           <Drawer.Trigger asChild>
             <h1 className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-light transition-colors hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
@@ -25,7 +25,7 @@ const CreateLink = () => {
           </Drawer.Trigger>
           <Drawer.Portal>
             <Drawer.Overlay className="fixed inset-0 bg-light/40" />
-            <Drawer.Content className="fixed bottom-0 left-0 right-0 flex max-h-[82vh] flex-col rounded-t-[10px] bg-light px-2">
+            <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 flex max-h-[82vh] flex-col rounded-t-[10px] border bg-light px-2">
               <div className="mx-auto mt-4 h-1.5 w-20 flex-shrink-0 rounded-full bg-zinc-300" />
 
               <div className="scrollbar-hide m-4 mx-auto flex w-full max-w-md flex-col overflow-auto rounded-t-[10px]">
