@@ -1,5 +1,7 @@
 "use client";
 
+import { Skeleton } from "~/components/ui/skeleton";
+
 type Props = {
   title: string;
   description: string;
@@ -17,11 +19,17 @@ const Twitter: React.FC<Props> = ({ title, description, url, image }) => {
       />
       <div className="grid gap-1 p-3">
         <p className="text-sm text-muted-foreground">
-          {(url.split("//")[1] || "").split("/")[0] || ""}
+          {url ? (
+            (url.split("//")[1] || "").split("/")[0]
+          ) : (
+            <Skeleton className="my-1 h-3 w-24" />
+          )}
         </p>
-        <h3 className="truncate text-sm text-foreground">{title}</h3>
+        <h3 className="truncate text-sm text-foreground">
+          {title ? title : <Skeleton className="my-1 h-3 w-24" />}
+        </h3>
         <p className="line-clamp-2 text-sm text-muted-foreground">
-          {description}
+          {description ? description : <Skeleton className="my-1 h-2.5 w-48" />}
         </p>
       </div>
     </div>

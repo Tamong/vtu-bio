@@ -34,7 +34,7 @@ const SortBy: React.FC<Props> = ({ sortBy, handleSortBy }) => {
           </Drawer.Trigger>
           <Drawer.Portal>
             <Drawer.Overlay className="fixed inset-0 bg-light/40" />
-            <Drawer.Content className="fixed bottom-0 left-0 right-0 flex max-h-[82vh] flex-col rounded-t-[10px] bg-light px-2">
+            <Drawer.Content className="fixed bottom-0 left-0 right-0 flex min-h-[60dvh] flex-col rounded-t-[10px] bg-light px-2">
               <div className="mx-auto mt-4 h-1.5 w-20 flex-shrink-0 rounded-full bg-zinc-300" />
               <div className="pb-16 pt-4">
                 <Button
