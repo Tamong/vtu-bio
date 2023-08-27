@@ -10,10 +10,10 @@ export const config = {
 };
 
 const formSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  url: z.string().url(),
-  image: z.string().url(),
+  title: z.string().max(512),
+  description: z.string().max(512),
+  url: z.string().url().max(512),
+  image: z.string().url().max(512),
   slug: z.string().min(7).max(7),
 });
 

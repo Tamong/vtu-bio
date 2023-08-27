@@ -99,7 +99,7 @@ const LinkCard: React.FC<Props> = ({ data }) => {
                   <CardDescription>
                     <Icons.dot className="h-4 w-4" />
                   </CardDescription>
-                  <CardDescription className=" w-44 truncate sm:w-64">
+                  <CardDescription className=" w-40 truncate sm:w-64">
                     {data.url}
                   </CardDescription>
                 </div>

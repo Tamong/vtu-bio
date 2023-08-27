@@ -103,10 +103,10 @@ model Link {
   userId      String?
   vtuber      VTuber?      @relation(fields: [vtuberId], references: [id])
   vtuberId    String?
-  title       String       @default("")
-  description String       @default("")
-  image       String       @default("")
-  url         String       // the user's input
+  title       String       @default("") @db.VarChar(512)
+  description String       @default("") @db.VarChar(512)
+  image       String       @default("") @db.VarChar(512)
+  url         String       @default("") @db.VarChar(512)
   slug        String       @unique // vtu.bio/qwertyui   
   socialLink  socialLink?  
   createdAt   DateTime     @default(now())

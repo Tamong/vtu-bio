@@ -7,22 +7,28 @@ import { Toaster } from "@/components/ui/toaster";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
+import Head from "next/head";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <SessionProvider session={session}>
-        <div className="flex flex-col">
-          <Component {...pageProps} />
-          <Toaster />
-          <TailwindIndicator />
-        </div>
-        <Analytics />
-      </SessionProvider>
-    </ThemeProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+      </Head>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <SessionProvider session={session}>
+          <div className="flex flex-col">
+            <Component {...pageProps} />
+            <Toaster />
+            <TailwindIndicator />
+          </div>
+          <Analytics />
+        </SessionProvider>
+      </ThemeProvider>
+    </>
   );
 };
 

@@ -22,10 +22,10 @@ import { nanoid } from "@/lib/utils";
 import Twitter from "./previews/twitter";
 
 const formSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  url: z.string().url(),
-  image: z.string().url(),
+  title: z.string().max(512),
+  description: z.string().max(512),
+  url: z.string().url().max(512),
+  image: z.string().url().max(512),
   slug: z.string().min(7).max(7),
 });
 
@@ -72,7 +72,6 @@ const CreateForm = () => {
 
   const { mutate: getMetatags } = api.tags.getMetatags.useMutation({
     onSuccess: (data) => {
-      console.log(data);
       form.setValue("title", data.title);
       form.setValue("description", data.description);
       form.setValue("image", data.image || "");
@@ -102,7 +101,7 @@ const CreateForm = () => {
     });
   };
   return (
-    <div className="scrollbar-hide relative grid  gap-5 overflow-auto  md:grid-cols-2 md:overflow-hidden">
+    <div className="scrollbar-hide relative grid gap-5 overflow-auto p-2  md:grid-cols-2 md:overflow-hidden">
       <div>
         <div className="flex justify-center text-xl font-medium">
           Create a new Link
