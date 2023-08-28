@@ -18,19 +18,27 @@ const Twitter: React.FC<Props> = ({ title, description, url, image }) => {
         className="h-[250px] w-full border-b border-gray-300 object-cover"
       />
       <div className="grid gap-1 p-3">
-        <p className="text-sm text-muted-foreground">
-          {url ? (
-            (url.split("//")[1] || "").split("/")[0]
-          ) : (
-            <Skeleton className="my-1 h-3 w-24" />
-          )}
-        </p>
-        <h3 className="truncate text-sm text-foreground">
-          {title ? title : <Skeleton className="my-1 h-3 w-24" />}
-        </h3>
-        <p className="line-clamp-2 text-sm text-muted-foreground">
-          {description ? description : <Skeleton className="my-1 h-2.5 w-48" />}
-        </p>
+        {url ? (
+          <p className="text-sm text-muted-foreground">
+            {(url.split("//")[1] || "").split("/")[0]}
+          </p>
+        ) : (
+          <Skeleton className="my-1 h-3 w-24" />
+        )}
+
+        {title ? (
+          <h3 className="truncate text-sm text-foreground">{title}</h3>
+        ) : (
+          <Skeleton className="my-1 h-3 w-24" />
+        )}
+
+        {description ? (
+          <p className="line-clamp-2 text-sm text-muted-foreground">
+            {description}
+          </p>
+        ) : (
+          <Skeleton className="my-1 h-2.5 w-48" />
+        )}
       </div>
     </div>
   );

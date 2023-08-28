@@ -1,10 +1,15 @@
-import { NextFetchEvent, type NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
 import { parse } from "node-html-parser";
 import { isValidUrl } from "@/lib/utils";
 import { ratelimit, recordMetatags } from "@/lib/upstash";
 import { getToken } from "next-auth/jwt";
 import { ipAddress } from "@vercel/edge";
-import { api } from "~/utils/api";
+import { z } from "zod";
+import {
+  createTRPCRouter,
+  //publicProcedure,
+  protectedProcedure,
+} from "~/server/api/trpc";
 
 export const config = {
   runtime: "edge",
@@ -26,7 +31,7 @@ type MetaTagsResponse = {
   image: string | null;
 };
 
-export default async function handler(req: NextRequest, ev: NextFetchEvent) {
+export default async function handler(req: NextRequest) {
   if (req.method === "GET") {
     const url = req.nextUrl.searchParams.get("url");
     if (!url || !isValidUrl(url)) {
@@ -180,18 +185,6 @@ export const getMetaTags = async (
     image: imageUrl,
   };
 };
-
-import { z } from "zod";
-import {
-  createTRPCRouter,
-  //publicProcedure,
-  protectedProcedure,
-} from "~/server/api/trpc";
-
-//-----------------------------------------------
-//-----------------------------------------------
-//-----------------------------------------------
-//-----------------------------------------------
 
 const inputSchema = z.object({
   url: z.string().url(),

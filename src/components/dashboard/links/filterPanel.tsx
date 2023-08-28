@@ -65,7 +65,7 @@ const FilterPanel: React.FC<Props> = ({ setFilter }) => {
                     >
                       <Icons.search className="h-4 w-4" />
                       <input
-                        className="ml-2 max-w-2xl border-none bg-transparent outline-none"
+                        className="ml-2 w-full border-none bg-transparent outline-none"
                         placeholder="Search..."
                         {...field}
                       />

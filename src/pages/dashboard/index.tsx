@@ -1,7 +1,6 @@
 import { type NextPage } from "next";
 import Layout from "~/components/dashboard/layout";
 import Head from "next/head";
-import { api } from "~/utils/api";
 
 //import { lazy, Suspense, useEffect } from "react";
 import { useRouter } from "next/router";
