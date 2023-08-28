@@ -107,48 +107,46 @@ const LinkCard: React.FC<Props> = ({ data }) => {
             </div>
           </div>
         </CardContent>
-        <CardContent>
-          <div className="flex flex-row items-center">
-            <CardDescription className="block w-full sm:hidden">
-              <Badge variant="outline">{data.clicks}</Badge>
-            </CardDescription>
-            <CardDescription className="hidden w-full sm:block ">
-              <Badge variant="outline">{data.clicks} clicks</Badge>
-            </CardDescription>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
-                  <span className="sr-only">Open menu</span>
-                  <Icons.more className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem
-                  onClick={async () => {
-                    await navigator.clipboard.writeText(
-                      `https://vtu.bio/${data.slug}`
-                    );
+        <CardContent className="flex flex-row items-center">
+          <Badge className="block sm:hidden" variant="outline">
+            {data.clicks}
+          </Badge>
+          <Badge className="hidden sm:block" variant="outline">
+            {data.clicks} clicks
+          </Badge>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <Icons.more className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem
+                onClick={async () => {
+                  await navigator.clipboard.writeText(
+                    `https://vtu.bio/${data.slug}`
+                  );
 
-                    toast({
-                      title: "Link to your clipboard!",
-                      description: `https://vtu.bio/${data.slug}`,
-                    });
-                  }}
-                >
-                  Copy link
-                </DropdownMenuItem>
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem
-                  className="focus:bg-destructive focus:text-destructive-foreground"
-                  onClick={async () => {
-                    onSubmitDelete(data.id);
-                  }}
-                >
-                  Delete
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+                  toast({
+                    title: "Link to your clipboard!",
+                    description: `https://vtu.bio/${data.slug}`,
+                  });
+                }}
+              >
+                Copy link
+              </DropdownMenuItem>
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem
+                className="focus:bg-destructive focus:text-destructive-foreground"
+                onClick={async () => {
+                  onSubmitDelete(data.id);
+                }}
+              >
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </CardContent>
       </Card>
     </>

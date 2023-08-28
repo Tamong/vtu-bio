@@ -9,7 +9,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Drawer } from "vaul";
-import { useState } from "react";
 
 type Props = {
   sortBy: string;
