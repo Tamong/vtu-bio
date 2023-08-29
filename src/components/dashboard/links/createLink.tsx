@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 
 import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog";
@@ -15,7 +16,9 @@ const CreateLink = () => {
         </DialogTrigger>
 
         <DialogContent className="min-h-[min(906px,_90dvh)] w-full min-w-[min(936px,_90dvw)] bg-light">
-          <CreateForm />
+          <Suspense>
+            <CreateForm />
+          </Suspense>
         </DialogContent>
       </Dialog>
     </>
