@@ -8,9 +8,7 @@ import { useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 
-const CreateLink = lazy(
-  () => import("~/components/dashboard/links/createLink")
-);
+import CreateLink from "~/components/dashboard/links/createLink";
 import LinkCardSkeleton from "~/components/dashboard/links/LinkCardSkeleton";
 const LinkCard = lazy(() => import("~/components/dashboard/links/LinkCard"));
 import SortBy from "~/components/dashboard/links/sortBy";
@@ -60,9 +58,7 @@ const Link: NextPage = () => {
                 <h1 className="flex text-3xl font-semibold drop-shadow-sm">
                   My Links
                 </h1>
-                <Suspense>
-                  <CreateLink />
-                </Suspense>
+                <CreateLink />
               </div>
             </div>
           </div>
