@@ -1,17 +1,9 @@
 "use client";
 
-import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog";
 import CreateForm from "./create/createForm";
-import { Drawer } from "vaul";
 
 const CreateLink = () => {
   return (
@@ -23,9 +15,7 @@ const CreateLink = () => {
         </DialogTrigger>
 
         <DialogContent className="min-h-[min(906px,_90dvh)] w-full min-w-[min(936px,_90dvw)] bg-light">
-          <Suspense>
-            <CreateForm />
-          </Suspense>
+          <CreateForm />
         </DialogContent>
       </Dialog>
     </>

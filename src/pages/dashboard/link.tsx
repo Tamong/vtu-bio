@@ -11,11 +11,10 @@ import { api } from "~/utils/api";
 const CreateLink = lazy(
   () => import("~/components/dashboard/links/createLink")
 );
-
 import LinkCardSkeleton from "~/components/dashboard/links/LinkCardSkeleton";
 const LinkCard = lazy(() => import("~/components/dashboard/links/LinkCard"));
-const SortBy = lazy(() => import("~/components/dashboard/links/sortBy"));
-const FilterBy = lazy(() => import("~/components/dashboard/links/filterBy"));
+import SortBy from "~/components/dashboard/links/sortBy";
+import FilterBy from "~/components/dashboard/links/filterBy";
 const FilterPanel = lazy(
   () => import("~/components/dashboard/links/filterPanel")
 );
@@ -58,19 +57,12 @@ const Link: NextPage = () => {
           <div className="flex h-32 w-full items-center border-b bg-light">
             <div className="w-full items-center">
               <div className=" mx-auto flex max-w-screen-xl items-center justify-between px-2.5 lg:px-20">
-                {/* Left Side */}
-                <div className="flex items-center">
-                  <h1 className="flex text-3xl font-semibold drop-shadow-sm">
-                    My Links
-                  </h1>
-                </div>
-
-                {/* Right Side */}
-                <div className="flex items-center">
-                  <Suspense>
-                    <CreateLink />
-                  </Suspense>
-                </div>
+                <h1 className="flex text-3xl font-semibold drop-shadow-sm">
+                  My Links
+                </h1>
+                <Suspense>
+                  <CreateLink />
+                </Suspense>
               </div>
             </div>
           </div>
@@ -80,14 +72,10 @@ const Link: NextPage = () => {
             {/* Top Menu */}
             <div className="flex items-center justify-between px-2 py-6 lg:justify-end lg:px-0">
               <div className="block lg:hidden">
-                <Suspense fallback={<div>Loading...</div>}>
-                  <FilterBy setFilter={setFilter} />
-                </Suspense>
+                <FilterBy setFilter={setFilter} />
               </div>
-              <div className="">
-                <Suspense fallback={<div>Loading...</div>}>
-                  <SortBy sortBy={sortBy} handleSortBy={handleSortBy} />
-                </Suspense>
+              <div>
+                <SortBy sortBy={sortBy} handleSortBy={handleSortBy} />
               </div>
             </div>
 
