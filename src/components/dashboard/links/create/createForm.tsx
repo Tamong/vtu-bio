@@ -120,6 +120,7 @@ const CreateForm = () => {
                         placeholder="https://vtu.bio/"
                         {...field}
                         onPaste={handlePaste}
+                        autoFocus={false}
                       />
                     </FormControl>
                     <FormMessage />
