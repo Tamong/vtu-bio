@@ -75,6 +75,7 @@ const LinkCard: React.FC<Props> = ({ data }) => {
                   href={`https://vtu.bio/${data.slug}`}
                 >{`https://vtu.bio/${data.slug}`}</Link>
                 <Button
+                  aria-label="Copy link"
                   variant="ghost"
                   className="h-8 w-8 p-0"
                   onClick={async () => {

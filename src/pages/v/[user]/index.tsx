@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 
 const Home: NextPage<{ user: string }> = ({ user }) => {
   const { data } = api.profile.getUser.useQuery({ slug: user });
-  console.log(data);
 
   if (!data) {
     return <div>Loading...</div>;
