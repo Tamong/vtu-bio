@@ -23,7 +23,12 @@ const Link: NextPage = () => {
 
   const [filter, setFilter] = useState("");
 
-  const { data } = api.dashboard.getLinks.useQuery({ filter: filter });
+  const { data } = api.dashboard.getLinks.useQuery(
+    {
+      filter: filter,
+    },
+    { staleTime: 5 * 60000, cacheTime: 60 * 60000 }
+  );
 
   const [sortBy, setSortBy] = useState("date");
 
