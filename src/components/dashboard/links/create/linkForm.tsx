@@ -45,7 +45,6 @@ const LinkForm: React.FC<Props> = ({ formTitle }) => {
         form.setValue("url", url);
         getMetatags({ url: url });
       } catch {
-        console.log("Invalid URL");
         return;
       }
     },
@@ -106,7 +105,6 @@ const LinkForm: React.FC<Props> = ({ formTitle }) => {
       form.setValue("title", "");
       form.setValue("description", "");
       form.setValue("image", "");
-      console.log("No metatags found");
     },
   });
 

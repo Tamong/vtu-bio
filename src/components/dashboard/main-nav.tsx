@@ -18,7 +18,11 @@ const MainNav = () => {
         {/* Left Side */}
         <div className="flex list-none items-center">
           <li>
-            <Link href="/dashboard" className="flex items-center">
+            <Link
+              href="/dashboard"
+              aria-label="dashboard"
+              className="flex items-center"
+            >
               <Icons.mask className="h-8 w-8 text-foreground" />
             </Link>
           </li>
