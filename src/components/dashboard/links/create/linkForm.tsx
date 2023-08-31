@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useDebounce, useDebouncedCallback } from "use-debounce";
 import { api } from "~/utils/api";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,9 +30,28 @@ const formSchema = z.object({
   slug: z.string().min(7).max(7),
 });
 
-const CreateForm = () => {
+type Props = {
+  formTitle: string;
+};
+
+const LinkForm: React.FC<Props> = ({ formTitle }) => {
   const { toast } = useToast();
   const [slug, setSlug] = useState("");
+  const debounced = useDebouncedCallback(
+    // function
+    (url) => {
+      try {
+        z.string(url).url().max(512).parse(url);
+        form.setValue("url", url);
+        getMetatags({ url: url });
+      } catch {
+        console.log("Invalid URL");
+        return;
+      }
+    },
+    // delay in ms
+    1000
+  );
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -83,14 +103,12 @@ const CreateForm = () => {
       }
     },
     onError: () => {
+      form.setValue("title", "");
+      form.setValue("description", "");
+      form.setValue("image", "");
       console.log("No metatags found");
     },
   });
-
-  function handlePaste(e: React.ClipboardEvent<HTMLInputElement>) {
-    const url = e.clipboardData.getData("text");
-    getMetatags({ url: url });
-  }
 
   const copyToClipboard = async () => {
     const link = `https://vtu.bio/${slug}`;
@@ -104,7 +122,7 @@ const CreateForm = () => {
     <div className="scrollbar-hide relative grid gap-5 overflow-auto p-2  md:grid-cols-2 md:overflow-hidden">
       <div>
         <div className="flex justify-center text-xl font-medium">
-          Create a new Link
+          {formTitle}
         </div>
         <div>
           <Form {...form}>
@@ -117,10 +135,8 @@ const CreateForm = () => {
                     <FormLabel>Destination URL</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="https://vtu.bio/"
-                        {...field}
-                        onPaste={handlePaste}
                         autoFocus={false}
+                        onChange={(e) => debounced(e.target.value)}
                       />
                     </FormControl>
                     <FormMessage />
@@ -148,4 +164,4 @@ const CreateForm = () => {
   );
 };
 
-export default CreateForm;
+export default LinkForm;

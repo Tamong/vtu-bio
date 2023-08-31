@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 
 import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog";
-import CreateForm from "./create/createForm";
+import LinkForm from "./create/linkForm";
 import { Drawer } from "vaul";
 
 const CreateLink = () => {
@@ -19,7 +19,7 @@ const CreateLink = () => {
 
           <DialogContent className="min-h-[min(906px,_90dvh)] w-full min-w-[min(936px,_90dvw)] bg-light">
             <Suspense>
-              <CreateForm />
+              <LinkForm formTitle={"Create a new Link"} />
             </Suspense>
           </DialogContent>
         </Dialog>
@@ -36,7 +36,7 @@ const CreateLink = () => {
                 <div className="mx-auto mt-4 h-1.5 w-20 flex-shrink-0 rounded-full bg-zinc-300" />
 
                 <Suspense>
-                  <CreateForm />
+                  <LinkForm formTitle={"Create a new Link"} />
                 </Suspense>
               </div>
             </Drawer.Content>
