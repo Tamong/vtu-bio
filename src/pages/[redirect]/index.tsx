@@ -22,7 +22,12 @@ const Redirect: NextPage<{ redirect: string }> = ({ redirect }) => {
       <Head>
         <title>{unescape(data.title)}</title>
         <meta property="og:title" content={unescape(data.title)} />
-        <meta property="og:site_name" content={unescape(data.url)} />
+        <meta
+          property="og:site_name"
+          content={unescape(
+            (data.url.split("//")[1] || "").split("/")[0] || ""
+          )}
+        />
         <meta
           property="og:description"
           content={unescape(
@@ -39,7 +44,12 @@ const Redirect: NextPage<{ redirect: string }> = ({ redirect }) => {
           })`}
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content={unescape(data.url)} />
+        <meta
+          name="twitter:site"
+          content={unescape(
+            (data.url.split("//")[1] || "").split("/")[0] || ""
+          )}
+        />
         <meta name="twitter:title" content={unescape(data.title)} />
         <meta
           name="twitter:description"
