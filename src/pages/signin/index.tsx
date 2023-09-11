@@ -23,7 +23,7 @@ const SignIn: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HomeNav />
+      <HomeNav auth={false} />
       <div className="container flex flex-col items-center justify-center gap-2">
         <div>
           <div className="my-2 flex min-w-full justify-between text-xl ">

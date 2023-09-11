@@ -8,12 +8,24 @@ import { Icons } from "@/components/icons";
 import { useRouter } from "next/router";
 import { ModeToggle } from "@/components/mode-toggle";
 
-const HomeNav: NextPage = () => {
+type Props = {
+  auth: boolean;
+};
+
+const HomeNav: React.FC<Props> = ({ auth }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const handleMenu = () => {
     open ? setOpen(false) : setOpen(true);
+  };
+
+  const handleClick = () => {
+    if (auth) {
+      router.push("/dashboard");
+    } else {
+      router.push("/signin");
+    }
   };
 
   return (
@@ -29,7 +41,9 @@ const HomeNav: NextPage = () => {
           </div>
 
           <div className="hidden items-center md:flex">
-            <Button onClick={() => router.push("/signin")}>Sign In</Button>
+            <Button onClick={handleClick}>
+              {auth ? "Dashboard" : "Sign In"}
+            </Button>
             <ModeToggle />
           </div>
 
@@ -44,8 +58,10 @@ const HomeNav: NextPage = () => {
       {/* Mobile menu */}
       <div className={!open ? "hidden md:hidden" : "pb-4 md:hidden"}>
         <div className="xl:w-96">
-          <div className="flex justify-end">
-            <Button onClick={() => router.push("/signin")}>Sign In</Button>
+          <div className="flex justify-end pr-2.5">
+            <Button onClick={handleClick}>
+              {auth ? "Dashboard" : "Sign In"}
+            </Button>
             <ModeToggle />
           </div>
         </div>
