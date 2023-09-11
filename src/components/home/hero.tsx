@@ -36,10 +36,9 @@ const Hero: NextPage = () => {
     <>
       <div className="my-32 flex min-w-full flex-col items-center justify-evenly bg-inherit md:flex-row">
         <div className="flex flex-col items-center justify-center px-4 text-4xl font-extrabold md:items-start md:text-[3rem]">
-          <h1>Custom Bio and</h1>
-          <h1>Short Links for</h1>
+          <h1>Short links and bio for</h1>
           <h1 className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            vTubers!
+            Virtual Creators
           </h1>
           <div className="mr-4 flex flex-row">
             <Button

@@ -4,15 +4,18 @@ import HomeNav from "~/components/home/home-nav";
 import Hero from "~/components/home/hero";
 import Trusts from "~/components/home/trusted";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
   const { status } = useSession();
-  const router = useRouter();
 
-  if (status === "authenticated") {
-    void router.replace("/dashboard");
-  }
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      setAuthenticated(true);
+    }
+  }, [authenticated, status]);
 
   return (
     <>
@@ -22,7 +25,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <HomeNav />
+        <HomeNav auth={authenticated} />
         <Hero />
         <Trusts />
       </main>
